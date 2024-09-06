@@ -64,4 +64,40 @@ export class UsersController {
         }
     }
 
+    @UseGuards(JwtAuthGuard)
+    @Post('filter')
+    async findWhereCompany(@Req() request: Request) {
+
+        var request_json = JSON.parse(JSON.stringify(request.body));
+        var fullname = null;
+        var startdate = null;
+        var enddate = null;
+        var merchant_id = null;
+        var data = null;
+        var email=null;
+        var role=null;
+        var page=null;
+        var limit=null;
+        var id=null;
+        var response={};
+        id = request_json["id"];
+        fullname = request_json["fullname"];
+        email = request_json["email"];
+        startdate = request_json["startdate"];
+        enddate = request_json["enddate"];
+        merchant_id = request_json["merchant_id"];
+        role = request_json["role"];
+        page =Number (request_json["page"]);
+        limit =Number (request_json["limit"]);
+        data = await this.usersService.findfilter(startdate, enddate, merchant_id, fullname,email,role,page,limit,id);
+        response={
+            "data":data,
+            "page":page,
+            "limit":limit,
+            "messages":"Success"
+        }
+        return response;
+
+    }
+
 }

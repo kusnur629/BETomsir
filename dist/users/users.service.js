@@ -37,6 +37,41 @@ let UsersService = class UsersService {
     findByEmail(email) {
         return this.usersRepository.findOneBy({ email: email });
     }
+    findfilter(startdate, enddate, merchant_id, fullname, email, role, skip, take, id) {
+        var object = {};
+        var x = 0;
+        var y = 10;
+        if (id !== undefined) {
+            object = Object.assign({ id: id }, object);
+        }
+        if (fullname !== undefined) {
+            object = Object.assign({ fullname: fullname }, object);
+        }
+        if (merchant_id !== undefined) {
+            object = Object.assign({ merchant_id: merchant_id }, object);
+        }
+        if (email !== undefined) {
+            object = Object.assign({ email: email }, object);
+        }
+        if (role !== undefined) {
+            object = Object.assign({ role: role }, object);
+        }
+        if (startdate !== undefined && enddate !== undefined) {
+            object = Object.assign({ createdAt: (0, typeorm_2.Between)(startdate, enddate), }, object);
+        }
+        if (skip > 0) {
+            x = (skip * take);
+        }
+        if (take > 0) {
+            y = take;
+        }
+        const query = this.usersRepository.find({
+            where: object,
+            skip: x,
+            take: y
+        });
+        return query;
+    }
 };
 UsersService = __decorate([
     (0, common_1.Injectable)(),

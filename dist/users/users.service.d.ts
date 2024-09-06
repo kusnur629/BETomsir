@@ -10,4 +10,5 @@ export declare class UsersService {
     findById(id: number): Promise<Tbl_user>;
     findByUsername(userName: string): Promise<Tbl_user>;
     findByEmail(email: string): Promise<Tbl_user>;
+    findfilter(startdate: Date, enddate: Date, merchant_id: string, fullname: string, email: string, role: string, skip: number, take: number, id: string): Promise<Tbl_user[]>;
 }

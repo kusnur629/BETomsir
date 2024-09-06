@@ -7,4 +7,5 @@ export declare class UsersController {
     findAll(): Promise<Tbl_user[]>;
     findOne(id: number): Promise<Tbl_user>;
     create(res: any, CreateUsersDto: CreateUsersDto, req: any): Promise<void>;
+    findWhereCompany(request: Request): Promise<{}>;
 }
