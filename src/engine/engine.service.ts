@@ -2,7 +2,7 @@
 import { Logger, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as fs from 'fs';
-//const sharp = require('sharp');
+const sharp = require('sharp');
 // const webp = require('webp-converter');
 var path = require("path");
 @Injectable()
