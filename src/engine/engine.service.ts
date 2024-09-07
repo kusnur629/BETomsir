@@ -3,7 +3,7 @@ import { Logger, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as fs from 'fs';
 //const sharp = require('sharp');
-// const webp = require('webp-converter');
+ const webp = require('webp-converter');
 var path = require("path");
 @Injectable()
 export class EngineService {
@@ -15,58 +15,27 @@ export class EngineService {
      
     
       ) { }
-    // async uploadFile(file: Express.Multer.File, format: string, path: string, filename: string) {
-    //     //Get Image Information
-    //     var image_information = await sharp(file.buffer).metadata();
-    //     console.log("IMAGE INFORMATION", image_information);
+    async uploadFile(file: Express.Multer.File, format: string, path: string, filename: string) {
+        //Get Image Information
+        var image_information = await file.buffer;
+   
+   
     
-    //     var image_height = image_information.height;
-    //     var image_width = image_information.width;
-    //     var image_size = image_information.size;
-    //     var image_format = image_information.format;
-    //     var image_orientation = image_information.orientation;
+        //Convert Image
+        const buffers_file = await webp.buffer2webpbuffer(file.buffer, format, "-q 70", this.configService.get("PATH_UPLOAD"));
+        var file_commpress = buffers_file;
     
-    //     //Get Image Mode
-    //     var image_mode = await this.getImageMode(image_width, image_height);
-    //     console.log("IMAGE MODE", image_mode);
-    
-    //     //Get Ceck Mode
-    //     var New_height = 0;
-    //     var New_width = 0;
-    //     if (image_mode == "LANDSCAPE") {
-    //       New_height = image_height;
-    //       New_width = image_width;
-    //     } else if (image_mode == "POTRET") {
-    //       New_height = image_height;
-    //       New_width = image_width;
-    //     }
-    
-    //     //Convert Image
-    //     const buffers_file = await webp.buffer2webpbuffer(file.buffer, format, "-q 70", this.configService.get("PATH_UPLOAD"));
-    //     var file_commpress = buffers_file;
-    
-    //     //Convert Image Orientation
-    //     var file_commpress = null;
-    //     if (image_orientation == 1) {
-    //       file_commpress = await sharp(buffers_file).resize(Math.round(New_width), Math.round(New_height)).toBuffer();
-    //     } else if (image_orientation == 6) {
-    //       file_commpress = await sharp(buffers_file).rotate(90).resize(Math.round(New_height), Math.round(New_width)).toBuffer();
-    //     } else if (image_orientation == 8) {
-    //       file_commpress = await sharp(buffers_file).rotate(270).resize(Math.round(New_height), Math.round(New_width)).toBuffer();
-    //     } else {
-    //       file_commpress = buffers_file;
-    //     }
-    
-    //     if (await this.createFolder('./temp/', path)) {
-    //       fs.writeFile("./temp/" + path + "/" + filename + "." + format, file_commpress, function (err) {
-    //         if (err) {
-    //           return console.log(err);
-    //         }
-    //         console.log("The file was saved!");
-    //       });
-    //     }
-    //     return file_commpress;
-    //   }
+
+        if (await this.createFolder('./temp/', path)) {
+          fs.writeFile("./temp/" + path + "/" + filename + "." + format, file_commpress, function (err) {
+            if (err) {
+              return console.log(err);
+            }
+            console.log("The file was saved!");
+          });
+        }
+        return file_commpress;
+      }
 
       async getImageMode(width: number, height: number) {
         var mode = "LANDSCAPE";

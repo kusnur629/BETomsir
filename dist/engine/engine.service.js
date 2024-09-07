@@ -14,12 +14,26 @@ exports.EngineService = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const fs = require("fs");
-const sharp = require('sharp');
+const webp = require('webp-converter');
 var path = require("path");
 let EngineService = EngineService_1 = class EngineService {
     constructor(configService) {
         this.configService = configService;
         this.logger = new common_1.Logger(EngineService_1.name);
+    }
+    async uploadFile(file, format, path, filename) {
+        var image_information = await file.buffer;
+        const buffers_file = await webp.buffer2webpbuffer(file.buffer, format, "-q 70", this.configService.get("PATH_UPLOAD"));
+        var file_commpress = buffers_file;
+        if (await this.createFolder('./temp/', path)) {
+            fs.writeFile("./temp/" + path + "/" + filename + "." + format, file_commpress, function (err) {
+                if (err) {
+                    return console.log(err);
+                }
+                console.log("The file was saved!");
+            });
+        }
+        return file_commpress;
     }
     async getImageMode(width, height) {
         var mode = "LANDSCAPE";
