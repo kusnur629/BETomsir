@@ -28,7 +28,7 @@ let UsersController = class UsersController {
         return this.usersService.findAll();
     }
     findOne(id) {
-        return this.usersService.findById(id);
+        return this.ViewuserService.findById(id);
     }
     async create(res, CreateUsersDto, req) {
         const messages = {
@@ -56,7 +56,73 @@ let UsersController = class UsersController {
             });
         }
     }
+    async update(res, CreateUsersDto, request) {
+        const messages = {
+            "info": ["The update successful"],
+        };
+        const messagesEror = {
+            "info": ["Todo is not found!"],
+        };
+        var request_json = JSON.parse(JSON.stringify(request.body));
+        var id = null;
+        if (request_json["id"] !== undefined) {
+            id = request_json["id"];
+        }
+        else {
+            throw new common_1.BadRequestException("Unabled to proceed");
+        }
+        if (CreateUsersDto.password !== undefined) {
+            const passwordInPlaintext = CreateUsersDto.password;
+            const hash = await bcrypt.hash(passwordInPlaintext, 10);
+            CreateUsersDto.password = hash;
+        }
+        CreateUsersDto.updatedAt = new Date(Date.now());
+        try {
+            let data = await this.usersService.update(id, CreateUsersDto);
+            res.status(common_1.HttpStatus.OK).json({
+                response_code: 202,
+                "data": data,
+                "message": messages
+            });
+        }
+        catch (e) {
+            res.status(common_1.HttpStatus.BAD_REQUEST).json({
+                "message": messagesEror
+            });
+        }
+    }
+    async delete(id) {
+        const messages = {
+            "info": ["The delete successful"],
+        };
+        if (id == undefined || id == "") {
+            throw new common_1.BadRequestException('Param id is required');
+        }
+        var data = null;
+        try {
+            data = await this.usersService.findById(id);
+        }
+        catch (e) {
+            data = null;
+        }
+        if (data && data !== null) {
+            try {
+                await this.usersService.destroy(id);
+            }
+            catch (e) {
+                throw new common_1.BadRequestException("Unabled to proceed");
+            }
+        }
+        var response = {
+            "response_code": 202,
+            "messages": messages
+        };
+        return response;
+    }
     async findWhereCompany(request) {
+        const messages = {
+            "info": ["Data successful"],
+        };
         var request_json = JSON.parse(JSON.stringify(request.body));
         var fullname = null;
         var startdate = null;
@@ -87,7 +153,7 @@ let UsersController = class UsersController {
             "data": data,
             "page": page,
             "limit": limit,
-            "messages": "Success"
+            "messages": messages
         };
         return response;
     }
@@ -117,6 +183,24 @@ __decorate([
     __metadata("design:paramtypes", [Object, create_users_dto_1.CreateUsersDto, Object]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "create", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Post)('update'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Body)()),
+    __param(2, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, create_users_dto_1.CreateUsersDto, Object]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "update", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Post)('delete/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "delete", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Post)('filter'),

@@ -19,11 +19,18 @@ export class UsersService {
         const newUser = this.usersRepository.create(createUsersDto);
         return this.usersRepository.save(newUser);
     }
-
+    async update(id: string, data: Partial<CreateUsersDto>) {
+        await this.usersRepository.update({ id }, data);
+        return await this.usersRepository.findOneBy({ id });
+      }
+      async destroy(id: string) {
+        await this.usersRepository.delete({ id });
+        return { deleted: true };
+      }
     findAll() {
         return this.usersRepository.find();
     }
-    findById(id: number) {
+    findById(id: string) {
         return this.usersRepository.findOneBy({ id: id });
     }
     findByUsername(userName: string) {

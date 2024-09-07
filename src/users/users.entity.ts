@@ -3,7 +3,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class Tbl_user {
     @PrimaryGeneratedColumn('uuid')
-    id: number;
+    id: string;
     @Column()
     fullname: string;
     @Column()

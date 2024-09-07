@@ -30,8 +30,8 @@ export class UsersController {
 
     @UseGuards(JwtAuthGuard)
     @Get(':id')
-    findOne(@Param('id', ParseIntPipe) id: number): Promise<Tbl_user> {
-        return this.usersService.findById(id);
+    findOne(@Param('id', ParseIntPipe) id: number): Promise<Viewuser> {
+        return this.ViewuserService.findById(id);
     }
     @UseGuards(JwtAuthGuard)
     @Post('create')
@@ -67,9 +67,86 @@ export class UsersController {
     }
 
     @UseGuards(JwtAuthGuard)
+    @Post('update')
+    async update(@Res() res, @Body() CreateUsersDto: CreateUsersDto, @Request() request) {
+        const messages = {
+            "info": ["The update successful"],
+        };
+
+        const messagesEror = {
+            "info": ["Todo is not found!"],
+        };
+
+        var request_json = JSON.parse(JSON.stringify(request.body));
+        var id = null;
+
+        if (request_json["id"] !== undefined) {
+            id = request_json["id"];
+        } else {
+            throw new BadRequestException("Unabled to proceed");
+        }
+        if(CreateUsersDto.password !==undefined){
+            const passwordInPlaintext = CreateUsersDto.password;
+            const hash = await bcrypt.hash(passwordInPlaintext, 10);
+            CreateUsersDto.password = hash;
+        }
+       
+        CreateUsersDto.updatedAt = new Date(Date.now());
+        try {
+           
+            let data = await this.usersService.update(id,CreateUsersDto);
+            res.status(HttpStatus.OK).json({
+                response_code: 202,
+                "data": data,
+                "message": messages
+            });
+        } catch (e) {
+            res.status(HttpStatus.BAD_REQUEST).json({
+
+                "message": messagesEror
+            });
+        }
+    }
+    @UseGuards(JwtAuthGuard)
+    @Post('delete/:id')
+    async delete(@Param('id') id: string) {
+        const messages = {
+            "info": ["The delete successful"],
+        };
+        if (id == undefined || id == "") {
+        
+            throw new BadRequestException(  'Param id is required');
+        }
+        var data = null;
+       
+        try {
+            data = await this.usersService.findById(id);
+        } catch (e) {
+            data= null;
+        }
+        if (data && data !== null) {
+           
+            try {
+                await this.usersService.destroy(id);
+            } catch (e) {
+                throw new BadRequestException("Unabled to proceed");
+            }
+        }
+
+        var response = {
+            "response_code": 202,
+            "messages": messages
+        }
+        return response;
+
+    }
+
+    @UseGuards(JwtAuthGuard)
     @Post('filter')
     async findWhereCompany(@Req() request: Request) {
-
+        const messages = {
+            "info": ["Data successful"],
+        };
         var request_json = JSON.parse(JSON.stringify(request.body));
         var fullname = null;
         var startdate = null;
@@ -100,7 +177,7 @@ export class UsersController {
             "data":data,
             "page":page,
             "limit":limit,
-            "messages":"Success"
+            "messages":messages
         }
         return response;
 

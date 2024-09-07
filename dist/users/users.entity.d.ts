@@ -1,5 +1,5 @@
 export declare class Tbl_user {
-    id: number;
+    id: string;
     fullname: string;
     email: string;
     password: string;

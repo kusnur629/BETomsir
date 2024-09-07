@@ -25,6 +25,14 @@ let UsersService = class UsersService {
         const newUser = this.usersRepository.create(createUsersDto);
         return this.usersRepository.save(newUser);
     }
+    async update(id, data) {
+        await this.usersRepository.update({ id }, data);
+        return await this.usersRepository.findOneBy({ id });
+    }
+    async destroy(id) {
+        await this.usersRepository.delete({ id });
+        return { deleted: true };
+    }
     findAll() {
         return this.usersRepository.find();
     }

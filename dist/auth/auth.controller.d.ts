@@ -3,7 +3,7 @@ export declare class AuthController {
     private authService;
     constructor(authService: AuthService);
     login(req: any): Promise<{
-        idUser: number;
+        idUser: string;
         email: string;
         role: string;
         merchant_id: string;
