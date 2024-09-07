@@ -9,7 +9,7 @@ import { UsersModule } from './users/users.module';
 
 
 import { Tbl_user } from './users/users.entity';
-
+import { Viewuser } from './users/viewuser.entity';
 @Module({
   imports: [ConfigModule.forRoot({ isGlobal: true }),EngineModule,
 
@@ -23,7 +23,7 @@ import { Tbl_user } from './users/users.entity';
       username: configService.get('DB_USERNAME'),
       password: configService.get('DB_PASSWORD'),
       database: configService.get('DB_NAME'),
-      entities: [ Tbl_user],
+      entities: [ Tbl_user,Viewuser],
 
     }),
 

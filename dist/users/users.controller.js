@@ -16,11 +16,13 @@ exports.UsersController = void 0;
 const common_1 = require("@nestjs/common");
 const create_users_dto_1 = require("./dto/create-users.dto");
 const users_service_1 = require("./users.service");
+const viewuser_service_1 = require("./viewuser.service");
 const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
 const bcrypt = require("bcrypt");
 let UsersController = class UsersController {
-    constructor(usersService) {
+    constructor(usersService, ViewuserService) {
         this.usersService = usersService;
+        this.ViewuserService = ViewuserService;
     }
     findAll() {
         return this.usersService.findAll();
@@ -65,6 +67,8 @@ let UsersController = class UsersController {
         var role = null;
         var page = null;
         var limit = null;
+        var descending = null;
+        var nameMerchant = null;
         var id = null;
         var response = {};
         id = request_json["id"];
@@ -76,7 +80,9 @@ let UsersController = class UsersController {
         role = request_json["role"];
         page = Number(request_json["page"]);
         limit = Number(request_json["limit"]);
-        data = await this.usersService.findfilter(startdate, enddate, merchant_id, fullname, email, role, page, limit, id);
+        nameMerchant = request_json["nameMerchant"];
+        descending = request_json["descending"];
+        data = await this.ViewuserService.findfilter(startdate, enddate, merchant_id, fullname, email, role, page, limit, id, nameMerchant, descending);
         response = {
             "data": data,
             "page": page,
@@ -121,7 +127,7 @@ __decorate([
 ], UsersController.prototype, "findWhereCompany", null);
 UsersController = __decorate([
     (0, common_1.Controller)('api/users'),
-    __metadata("design:paramtypes", [users_service_1.UsersService])
+    __metadata("design:paramtypes", [users_service_1.UsersService, viewuser_service_1.ViewuserService])
 ], UsersController);
 exports.UsersController = UsersController;
 //# sourceMappingURL=users.controller.js.map

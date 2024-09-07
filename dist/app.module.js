@@ -14,6 +14,7 @@ const engine_module_1 = require("./engine/engine.module");
 const auth_module_1 = require("./auth/auth.module");
 const users_module_1 = require("./users/users.module");
 const users_entity_1 = require("./users/users.entity");
+const viewuser_entity_1 = require("./users/viewuser.entity");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -29,7 +30,7 @@ AppModule = __decorate([
                     username: configService.get('DB_USERNAME'),
                     password: configService.get('DB_PASSWORD'),
                     database: configService.get('DB_NAME'),
-                    entities: [users_entity_1.Tbl_user],
+                    entities: [users_entity_1.Tbl_user, viewuser_entity_1.Viewuser],
                 }),
             }),
             auth_module_1.AuthModule,

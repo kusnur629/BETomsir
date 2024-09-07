@@ -13,13 +13,15 @@ import {
 } from '@nestjs/common';
 import { CreateUsersDto } from './dto/create-users.dto';
 import { UsersService } from 'src/users/users.service';
+import { ViewuserService } from 'src/users/viewuser.service';
+import { Viewuser } from 'src/users/viewuser.entity';
 import { Tbl_user } from 'src/users/users.entity';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import * as bcrypt from 'bcrypt';
 @Controller('api/users')
 export class UsersController {
 
-    constructor(private readonly usersService: UsersService) { }
+    constructor(private readonly usersService: UsersService,private readonly ViewuserService: ViewuserService) { }
     @UseGuards(JwtAuthGuard)
     @Get()
     findAll(): Promise<Tbl_user[]> {
@@ -78,6 +80,8 @@ export class UsersController {
         var role=null;
         var page=null;
         var limit=null;
+        var descending=null;
+        var nameMerchant=null;
         var id=null;
         var response={};
         id = request_json["id"];
@@ -89,7 +93,9 @@ export class UsersController {
         role = request_json["role"];
         page =Number (request_json["page"]);
         limit =Number (request_json["limit"]);
-        data = await this.usersService.findfilter(startdate, enddate, merchant_id, fullname,email,role,page,limit,id);
+        nameMerchant = request_json["nameMerchant"];
+        descending = request_json["descending"];
+        data = await this.ViewuserService.findfilter(startdate, enddate, merchant_id, fullname,email,role,page,limit,id,nameMerchant,descending);
         response={
             "data":data,
             "page":page,
