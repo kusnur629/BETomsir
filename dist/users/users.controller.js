@@ -69,7 +69,7 @@ let UsersController = class UsersController {
             id = request_json["id"];
         }
         else {
-            throw new common_1.BadRequestException("Unabled to proceed");
+            throw new common_1.BadRequestException('Param id is required');
         }
         if (CreateUsersDto.password !== undefined) {
             const passwordInPlaintext = CreateUsersDto.password;

@@ -6,8 +6,8 @@ import { AppService } from './app.service';
 import { EngineModule } from './engine/engine.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
-
-
+import { MerchantModule } from './merchant/merchant.module';
+import { Tbl_merchant } from './merchant/merchant.entity';
 import { Tbl_user } from './users/users.entity';
 import { Viewuser } from './users/viewuser.entity';
 @Module({
@@ -23,15 +23,15 @@ import { Viewuser } from './users/viewuser.entity';
       username: configService.get('DB_USERNAME'),
       password: configService.get('DB_PASSWORD'),
       database: configService.get('DB_NAME'),
-      entities: [ Tbl_user,Viewuser],
+      entities: [ Tbl_user,Viewuser,Tbl_merchant],
 
     }),
 
   }),
 
     AuthModule,
-
     UsersModule,
+    MerchantModule
 
   ],
 

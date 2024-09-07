@@ -83,7 +83,7 @@ export class UsersController {
         if (request_json["id"] !== undefined) {
             id = request_json["id"];
         } else {
-            throw new BadRequestException("Unabled to proceed");
+            throw new BadRequestException('Param id is required');
         }
         if(CreateUsersDto.password !==undefined){
             const passwordInPlaintext = CreateUsersDto.password;
