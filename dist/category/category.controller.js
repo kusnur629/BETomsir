@@ -18,6 +18,7 @@ const create_category_dto_1 = require("./dto/create-category.dto");
 const category_service_1 = require("./category.service");
 const viewcategory_service_1 = require("./viewcategory.service");
 const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
+const uuid_1 = require("uuid");
 let CategoryController = class CategoryController {
     constructor(CategoryService, ViewcategoryService) {
         this.CategoryService = CategoryService;
@@ -33,9 +34,11 @@ let CategoryController = class CategoryController {
         const messagesEror = {
             "info": ["Todo is not found!"],
         };
+        var id = (0, uuid_1.v4)();
+        CreateCategoryDto.id = id;
+        CreateCategoryDto.createdAt = new Date(Date.now());
+        CreateCategoryDto.updatedAt = new Date(Date.now());
         try {
-            CreateCategoryDto.createdAt = new Date(Date.now());
-            CreateCategoryDto.updatedAt = new Date(Date.now());
             let data = await this.CategoryService.create(CreateCategoryDto);
             res.status(common_1.HttpStatus.OK).json({
                 response_code: 202,
@@ -45,7 +48,7 @@ let CategoryController = class CategoryController {
         }
         catch (e) {
             res.status(common_1.HttpStatus.BAD_REQUEST).json({
-                "message": messagesEror
+                "message": messagesEror + e
             });
         }
     }

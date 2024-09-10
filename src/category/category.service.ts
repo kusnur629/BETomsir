@@ -10,8 +10,8 @@ export class CategoryService {
         @InjectRepository(Tbl_category)
         private readonly CategoryRepository: Repository<Tbl_category>,
     ) { }
-    create(createUsersDto: CreateCategoryDto) {
-        const newUser = this.CategoryRepository.create(createUsersDto);
+    create(CreateCategoryDto: CreateCategoryDto) {
+        const newUser = this.CategoryRepository.create(CreateCategoryDto);
         return this.CategoryRepository.save(newUser);
     }
     async update(id: string, data: Partial<CreateCategoryDto>) {

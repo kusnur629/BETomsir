@@ -12,6 +12,7 @@ import { Tbl_user } from './users/users.entity';
 import { Viewuser } from './users/viewuser.entity';
 import { Viewcategory } from './category/viewcategory.entity';
 import { CategoryModule } from './category/category.module';
+import { Tbl_category } from 'src/category/category.entity';
 @Module({
   imports: [ConfigModule.forRoot({ isGlobal: true }),EngineModule,
 
@@ -25,7 +26,7 @@ import { CategoryModule } from './category/category.module';
       username: configService.get('DB_USERNAME'),
       password: configService.get('DB_PASSWORD'),
       database: configService.get('DB_NAME'),
-      entities: [ Tbl_user,Viewuser,Tbl_merchant,Viewcategory],
+      entities: [ Tbl_user,Viewuser,Tbl_merchant,Viewcategory,Tbl_category],
 
     }),
 

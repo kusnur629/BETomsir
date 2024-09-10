@@ -1,10 +1,10 @@
 import { Tbl_category } from 'src/category/category.entity';
 import { Repository } from 'typeorm';
-import { CreateCategoryDto } from 'src/category/dto/create-Category.dto';
+import { CreateCategoryDto } from 'src/category/dto/create-category.dto';
 export declare class CategoryService {
     private readonly CategoryRepository;
     constructor(CategoryRepository: Repository<Tbl_category>);
-    create(createUsersDto: CreateCategoryDto): Promise<Tbl_category>;
+    create(CreateCategoryDto: CreateCategoryDto): Promise<Tbl_category>;
     update(id: string, data: Partial<CreateCategoryDto>): Promise<Tbl_category>;
     destroy(id: string): Promise<{
         deleted: boolean;

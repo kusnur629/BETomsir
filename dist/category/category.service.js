@@ -21,8 +21,8 @@ let CategoryService = class CategoryService {
     constructor(CategoryRepository) {
         this.CategoryRepository = CategoryRepository;
     }
-    create(createUsersDto) {
-        const newUser = this.CategoryRepository.create(createUsersDto);
+    create(CreateCategoryDto) {
+        const newUser = this.CategoryRepository.create(CreateCategoryDto);
         return this.CategoryRepository.save(newUser);
     }
     async update(id, data) {

@@ -45,7 +45,7 @@ export class CategoryController {
         CreateCategoryDto.createdAt = new Date(Date.now());
         CreateCategoryDto.updatedAt = new Date(Date.now());
         try {
-           
+    
             let data = await this.CategoryService.create(CreateCategoryDto);
             res.status(HttpStatus.OK).json({
                 response_code: 202,
@@ -55,7 +55,7 @@ export class CategoryController {
         } catch (e) {
             res.status(HttpStatus.BAD_REQUEST).json({
 
-                "message": messagesEror
+                "message": messagesEror + e
             });
         }
     }
