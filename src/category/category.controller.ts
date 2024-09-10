@@ -17,6 +17,7 @@ import { ViewcategoryService } from 'src/category/viewcategory.service';
 import { Viewcategory } from 'src/category/viewcategory.entity';
 import { Tbl_category } from 'src/category/category.entity';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { v4 as uuidv4, v6 as uuidv6 } from 'uuid';
 import * as bcrypt from 'bcrypt';
 @Controller('api/category')
 export class CategoryController {
@@ -39,10 +40,12 @@ export class CategoryController {
         const messagesEror = {
             "info": ["Todo is not found!"],
         };
-
+        var id = uuidv4();
+        CreateCategoryDto.id = id;
+        CreateCategoryDto.createdAt = new Date(Date.now());
+        CreateCategoryDto.updatedAt = new Date(Date.now());
         try {
-            CreateCategoryDto.createdAt = new Date(Date.now());
-            CreateCategoryDto.updatedAt = new Date(Date.now());
+           
             let data = await this.CategoryService.create(CreateCategoryDto);
             res.status(HttpStatus.OK).json({
                 response_code: 202,
