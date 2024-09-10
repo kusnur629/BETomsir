@@ -12,4 +12,5 @@ export declare class MerchantService {
     findAll(): Promise<Tbl_merchant[]>;
     findById(id: string): Promise<Tbl_merchant>;
     findByname(name: string): Promise<Tbl_merchant>;
+    findfilter(startdate: Date, enddate: Date, name: string, address: string, phone_number: string, skip: number, take: number, id: string, descending: boolean): Promise<Tbl_merchant[]>;
 }

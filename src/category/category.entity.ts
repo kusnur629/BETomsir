@@ -1,23 +1,21 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class Viewuser {
+export class Tbl_category {
     @PrimaryGeneratedColumn('uuid')
     id: string;
     @Column()
-    fullname: string;
+    name: string;
     @Column()
-    email: string;
-    @Column()
-    password: string;
-    @Column()
-    role: string;
+    icon: string;
     @Column()
     merchant_id: string;
+    @Column()
+    remark: string;
+    @Column()
+    createdBy: string;
     @Column()
     createdAt: Date;
     @Column()
     updatedAt: Date;
-    @Column()
-    name: string;
 }

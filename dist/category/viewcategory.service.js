@@ -12,37 +12,25 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MerchantService = void 0;
+exports.ViewcategoryService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
-const merchant_entity_1 = require("./merchant.entity");
+const viewcategory_entity_1 = require("./viewcategory.entity");
 const typeorm_2 = require("typeorm");
-let MerchantService = class MerchantService {
-    constructor(MerchantRepository) {
-        this.MerchantRepository = MerchantRepository;
-    }
-    create(createUsersDto) {
-        const newUser = this.MerchantRepository.create(createUsersDto);
-        return this.MerchantRepository.save(newUser);
-    }
-    async update(id, data) {
-        await this.MerchantRepository.update({ id }, data);
-        return await this.MerchantRepository.findOneBy({ id });
-    }
-    async destroy(id) {
-        await this.MerchantRepository.delete({ id });
-        return { deleted: true };
+let ViewcategoryService = class ViewcategoryService {
+    constructor(ViewcategoryRepository) {
+        this.ViewcategoryRepository = ViewcategoryRepository;
     }
     findAll() {
-        return this.MerchantRepository.find();
+        return this.ViewcategoryRepository.find();
     }
     findById(id) {
-        return this.MerchantRepository.findOneBy({ id: id });
+        return this.ViewcategoryRepository.findOneBy({ id: id });
     }
-    findByname(name) {
-        return this.MerchantRepository.findOneBy({ name: name });
+    findByUsername(name) {
+        return this.ViewcategoryRepository.findOneBy({ name: name });
     }
-    findfilter(startdate, enddate, name, address, phone_number, skip, take, id, descending) {
+    findfilter(startdate, enddate, merchant_id, name, nameMerchant, createdByName, skip, take, id, descending) {
         var object = {};
         var x = 0;
         var y = 10;
@@ -59,11 +47,14 @@ let MerchantService = class MerchantService {
         if (name !== undefined) {
             object = Object.assign({ name: (0, typeorm_2.Like)('%' + name + '%') }, object);
         }
-        if (address !== undefined) {
-            object = Object.assign({ address: (0, typeorm_2.Like)('%' + address + '%') }, object);
+        if (merchant_id !== undefined) {
+            object = Object.assign({ merchant_id: merchant_id }, object);
         }
-        if (phone_number !== undefined) {
-            object = Object.assign({ phone_number: (0, typeorm_2.Like)('%' + phone_number + '%') }, object);
+        if (nameMerchant !== undefined) {
+            object = Object.assign({ nameMerchant: (0, typeorm_2.Like)('%' + nameMerchant + '%') }, object);
+        }
+        if (createdByName !== undefined) {
+            object = Object.assign({ createdByName: (0, typeorm_2.Like)('%' + createdByName + '%') }, object);
         }
         if (startdate !== undefined && enddate !== undefined) {
             object = Object.assign({ createdAt: (0, typeorm_2.Between)(startdate, enddate), }, object);
@@ -74,7 +65,7 @@ let MerchantService = class MerchantService {
         if (take > 0) {
             y = take;
         }
-        const query = this.MerchantRepository.find({
+        const query = this.ViewcategoryRepository.find({
             where: object,
             order: { createdAt: order },
             skip: x,
@@ -83,10 +74,10 @@ let MerchantService = class MerchantService {
         return query;
     }
 };
-MerchantService = __decorate([
+ViewcategoryService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, typeorm_1.InjectRepository)(merchant_entity_1.Tbl_merchant)),
+    __param(0, (0, typeorm_1.InjectRepository)(viewcategory_entity_1.Viewcategory)),
     __metadata("design:paramtypes", [typeorm_2.Repository])
-], MerchantService);
-exports.MerchantService = MerchantService;
-//# sourceMappingURL=merchant.service.js.map
+], ViewcategoryService);
+exports.ViewcategoryService = ViewcategoryService;
+//# sourceMappingURL=viewcategory.service.js.map

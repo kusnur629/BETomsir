@@ -17,6 +17,14 @@ export declare class MerchantController {
             info: string[];
         };
     }>;
+    update(file: Express.Multer.File, CreateMerchantDto_: CreateMerchantDto, request: any): Promise<{
+        response_code: number;
+        data: Tbl_merchant;
+        messages: {
+            info: string[];
+        };
+    }>;
+    findWhereCompany(request: Request): Promise<{}>;
     getPict(id: string, response: any): Promise<void>;
     delete(id: string): Promise<{
         response_code: number;

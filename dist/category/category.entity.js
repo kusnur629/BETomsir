@@ -9,48 +9,44 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Viewuser = void 0;
+exports.Tbl_category = void 0;
 const typeorm_1 = require("typeorm");
-let Viewuser = class Viewuser {
+let Tbl_category = class Tbl_category {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
     __metadata("design:type", String)
-], Viewuser.prototype, "id", void 0);
+], Tbl_category.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Viewuser.prototype, "fullname", void 0);
+], Tbl_category.prototype, "name", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Viewuser.prototype, "email", void 0);
+], Tbl_category.prototype, "icon", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Viewuser.prototype, "password", void 0);
+], Tbl_category.prototype, "merchant_id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Viewuser.prototype, "role", void 0);
+], Tbl_category.prototype, "remark", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Viewuser.prototype, "merchant_id", void 0);
+], Tbl_category.prototype, "createdBy", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Date)
-], Viewuser.prototype, "createdAt", void 0);
+], Tbl_category.prototype, "createdAt", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Date)
-], Viewuser.prototype, "updatedAt", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Viewuser.prototype, "name", void 0);
-Viewuser = __decorate([
+], Tbl_category.prototype, "updatedAt", void 0);
+Tbl_category = __decorate([
     (0, typeorm_1.Entity)()
-], Viewuser);
-exports.Viewuser = Viewuser;
-//# sourceMappingURL=viewuser.entity.js.map
+], Tbl_category);
+exports.Tbl_category = Tbl_category;
+//# sourceMappingURL=category.entity.js.map

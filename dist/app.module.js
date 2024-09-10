@@ -17,6 +17,8 @@ const merchant_module_1 = require("./merchant/merchant.module");
 const merchant_entity_1 = require("./merchant/merchant.entity");
 const users_entity_1 = require("./users/users.entity");
 const viewuser_entity_1 = require("./users/viewuser.entity");
+const viewcategory_entity_1 = require("./category/viewcategory.entity");
+const category_module_1 = require("./category/category.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -32,12 +34,13 @@ AppModule = __decorate([
                     username: configService.get('DB_USERNAME'),
                     password: configService.get('DB_PASSWORD'),
                     database: configService.get('DB_NAME'),
-                    entities: [users_entity_1.Tbl_user, viewuser_entity_1.Viewuser, merchant_entity_1.Tbl_merchant],
+                    entities: [users_entity_1.Tbl_user, viewuser_entity_1.Viewuser, merchant_entity_1.Tbl_merchant, viewcategory_entity_1.Viewcategory],
                 }),
             }),
             auth_module_1.AuthModule,
             users_module_1.UsersModule,
-            merchant_module_1.MerchantModule],
+            merchant_module_1.MerchantModule,
+            category_module_1.CategoryModule],
     })
 ], AppModule);
 exports.AppModule = AppModule;

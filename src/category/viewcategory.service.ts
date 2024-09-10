@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Viewuser } from './viewuser.entity';
+import { Viewcategory } from './viewcategory.entity';
 import { Between, Like, Repository } from 'typeorm';
 
 
@@ -8,28 +8,25 @@ import { Between, Like, Repository } from 'typeorm';
 export type User = any;
 
 @Injectable()
-export class ViewuserService {
+export class ViewcategoryService {
 
     constructor(
-        @InjectRepository(Viewuser)
-        private readonly viewuserRepository: Repository<Viewuser>,
+        @InjectRepository(Viewcategory)
+        private readonly ViewcategoryRepository: Repository<Viewcategory>,
     ) { }
 
 
     findAll() {
-        return this.viewuserRepository.find();
+        return this.ViewcategoryRepository.find();
     }
     findById(id: string) {
-        return this.viewuserRepository.findOneBy({ id: id });
+        return this.ViewcategoryRepository.findOneBy({ id: id });
     }
-    findByUsername(userName: string) {
-        return this.viewuserRepository.findOneBy({ fullname: userName });
-    }
-    findByEmail(email: string) {
-        return this.viewuserRepository.findOneBy({ email: email });
+    findByUsername(name: string) {
+        return this.ViewcategoryRepository.findOneBy({ name: name });
     }
  
-    findfilter(startdate: Date, enddate: Date, merchant_id:string, fullname: string,email:string,role:string,skip: number, take: number,id:string,name:string,descending:boolean): Promise<Viewuser[]> {
+    findfilter(startdate: Date, enddate: Date, merchant_id:string, name: string,nameMerchant:string,createdByName:string,skip: number, take: number,id:string,descending:boolean): Promise<Viewcategory[]> {
         var object = {};
         var x=0;
         var y=10;
@@ -42,20 +39,18 @@ export class ViewuserService {
         if (id !== undefined) {
             object = Object.assign({ id: id }, object);
         }
-        if (fullname !== undefined) {
-            object = Object.assign({ fullname: Like ('%'+fullname+'%') }, object);
-        }
+       
         if (name !== undefined) {
             object = Object.assign({ name: Like ('%'+name+'%')}, object);
         }
         if (merchant_id !== undefined) {
             object = Object.assign({ merchant_id: merchant_id }, object);
         }
-        if (email !== undefined) {
-            object = Object.assign({ email: Like ('%'+email+'%') }, object);
+        if (nameMerchant !== undefined) {
+            object = Object.assign({ nameMerchant: Like ('%'+nameMerchant+'%') }, object);
         }
-        if (role !== undefined) {
-            object = Object.assign({ role: role }, object);
+        if (createdByName !== undefined) {
+            object = Object.assign({ createdByName: Like ('%'+createdByName+'%') }, object);
         }
         if (startdate !== undefined && enddate !==undefined) {
             object = Object.assign({ createdAt: Between(
@@ -71,7 +66,7 @@ export class ViewuserService {
             y= take
          }
 
-        const query = this.viewuserRepository.find(
+        const query = this.ViewcategoryRepository.find(
             {
                 where:object,
                 order:{createdAt:order},

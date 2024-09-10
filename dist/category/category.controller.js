@@ -12,25 +12,21 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UsersController = void 0;
+exports.CategoryController = void 0;
 const common_1 = require("@nestjs/common");
-const create_users_dto_1 = require("./dto/create-users.dto");
-const users_service_1 = require("./users.service");
-const viewuser_service_1 = require("./viewuser.service");
+const create_category_dto_1 = require("./dto/create-category.dto");
+const category_service_1 = require("./category.service");
+const viewcategory_service_1 = require("./viewcategory.service");
 const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
-const bcrypt = require("bcrypt");
-let UsersController = class UsersController {
-    constructor(usersService, ViewuserService) {
-        this.usersService = usersService;
-        this.ViewuserService = ViewuserService;
+let CategoryController = class CategoryController {
+    constructor(CategoryService, ViewcategoryService) {
+        this.CategoryService = CategoryService;
+        this.ViewcategoryService = ViewcategoryService;
     }
     findAll() {
-        return this.usersService.findAll();
+        return this.CategoryService.findAll();
     }
-    findOne(id) {
-        return this.ViewuserService.findById(id);
-    }
-    async create(res, CreateUsersDto, req) {
+    async create(res, CreateCategoryDto, req) {
         const messages = {
             "info": ["The create successful"],
         };
@@ -38,12 +34,9 @@ let UsersController = class UsersController {
             "info": ["Todo is not found!"],
         };
         try {
-            const passwordInPlaintext = CreateUsersDto.password;
-            const hash = await bcrypt.hash(passwordInPlaintext, 10);
-            CreateUsersDto.password = hash;
-            CreateUsersDto.createdAt = new Date(Date.now());
-            CreateUsersDto.updatedAt = new Date(Date.now());
-            let data = await this.usersService.create(CreateUsersDto);
+            CreateCategoryDto.createdAt = new Date(Date.now());
+            CreateCategoryDto.updatedAt = new Date(Date.now());
+            let data = await this.CategoryService.create(CreateCategoryDto);
             res.status(common_1.HttpStatus.OK).json({
                 response_code: 202,
                 "data": data,
@@ -56,7 +49,7 @@ let UsersController = class UsersController {
             });
         }
     }
-    async update(res, CreateUsersDto, request) {
+    async update(res, CreateCategoryDto, request) {
         const messages = {
             "info": ["The update successful"],
         };
@@ -71,14 +64,9 @@ let UsersController = class UsersController {
         else {
             throw new common_1.BadRequestException('Param id is required');
         }
-        if (CreateUsersDto.password !== undefined) {
-            const passwordInPlaintext = CreateUsersDto.password;
-            const hash = await bcrypt.hash(passwordInPlaintext, 10);
-            CreateUsersDto.password = hash;
-        }
-        CreateUsersDto.updatedAt = new Date(Date.now());
+        CreateCategoryDto.updatedAt = new Date(Date.now());
         try {
-            let data = await this.usersService.update(id, CreateUsersDto);
+            let data = await this.CategoryService.update(id, CreateCategoryDto);
             res.status(common_1.HttpStatus.OK).json({
                 response_code: 202,
                 "data": data,
@@ -100,14 +88,14 @@ let UsersController = class UsersController {
         }
         var data = null;
         try {
-            data = await this.usersService.findById(id);
+            data = await this.CategoryService.findById(id);
         }
         catch (e) {
             data = null;
         }
         if (data && data !== null) {
             try {
-                await this.usersService.destroy(id);
+                await this.CategoryService.destroy(id);
             }
             catch (e) {
                 throw new common_1.BadRequestException("Unabled to proceed");
@@ -124,13 +112,12 @@ let UsersController = class UsersController {
             "info": ["Data successful"],
         };
         var request_json = JSON.parse(JSON.stringify(request.body));
-        var fullname = null;
+        var name = null;
         var startdate = null;
         var enddate = null;
         var merchant_id = null;
         var data = null;
-        var email = null;
-        var role = null;
+        var createdByName = null;
         var page = null;
         var limit = null;
         var descending = null;
@@ -138,17 +125,16 @@ let UsersController = class UsersController {
         var id = null;
         var response = {};
         id = request_json["id"];
-        fullname = request_json["fullname"];
-        email = request_json["email"];
+        name = request_json["name"];
+        createdByName = request_json["createdByName"];
         startdate = request_json["startdate"];
         enddate = request_json["enddate"];
         merchant_id = request_json["merchant_id"];
-        role = request_json["role"];
         page = Number(request_json["page"]);
         limit = Number(request_json["limit"]);
         nameMerchant = request_json["nameMerchant"];
         descending = request_json["descending"];
-        data = await this.ViewuserService.findfilter(startdate, enddate, merchant_id, fullname, email, role, page, limit, id, nameMerchant, descending);
+        data = await this.ViewcategoryService.findfilter(startdate, enddate, merchant_id, name, nameMerchant, createdByName, page, limit, id, descending);
         response = {
             "data": data,
             "page": page,
@@ -164,15 +150,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], UsersController.prototype, "findAll", null);
-__decorate([
-    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
-    (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", Promise)
-], UsersController.prototype, "findOne", null);
+], CategoryController.prototype, "findAll", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Post)('create'),
@@ -180,9 +158,9 @@ __decorate([
     __param(1, (0, common_1.Body)()),
     __param(2, (0, common_1.Request)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, create_users_dto_1.CreateUsersDto, Object]),
+    __metadata("design:paramtypes", [Object, create_category_dto_1.CreateCategoryDto, Object]),
     __metadata("design:returntype", Promise)
-], UsersController.prototype, "create", null);
+], CategoryController.prototype, "create", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Post)('update'),
@@ -190,9 +168,9 @@ __decorate([
     __param(1, (0, common_1.Body)()),
     __param(2, (0, common_1.Request)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, create_users_dto_1.CreateUsersDto, Object]),
+    __metadata("design:paramtypes", [Object, create_category_dto_1.CreateCategoryDto, Object]),
     __metadata("design:returntype", Promise)
-], UsersController.prototype, "update", null);
+], CategoryController.prototype, "update", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Post)('delete/:id'),
@@ -200,7 +178,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
-], UsersController.prototype, "delete", null);
+], CategoryController.prototype, "delete", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Post)('filter'),
@@ -208,10 +186,10 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
-], UsersController.prototype, "findWhereCompany", null);
-UsersController = __decorate([
-    (0, common_1.Controller)('api/users'),
-    __metadata("design:paramtypes", [users_service_1.UsersService, viewuser_service_1.ViewuserService])
-], UsersController);
-exports.UsersController = UsersController;
-//# sourceMappingURL=users.controller.js.map
+], CategoryController.prototype, "findWhereCompany", null);
+CategoryController = __decorate([
+    (0, common_1.Controller)('api/category'),
+    __metadata("design:paramtypes", [category_service_1.CategoryService, viewcategory_service_1.ViewcategoryService])
+], CategoryController);
+exports.CategoryController = CategoryController;
+//# sourceMappingURL=category.controller.js.map

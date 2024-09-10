@@ -1,5 +1,5 @@
 export declare class Viewuser {
-    id: number;
+    id: string;
     fullname: string;
     email: string;
     password: string;

@@ -60,6 +60,72 @@ let MerchantController = class MerchantController {
             throw new common_1.BadRequestException('Failed create data ' + e);
         }
     }
+    async update(file, CreateMerchantDto_, request) {
+        var request_json = JSON.parse(JSON.stringify(request.body));
+        var id = null;
+        if (request_json["id"] !== undefined) {
+            id = request_json["id"];
+        }
+        else {
+            throw new common_1.BadRequestException('Param id is required');
+        }
+        var pathlogoSlider = "merchant/" + id;
+        var extension = "jpg";
+        if (file != undefined) {
+            await this.EngineService.uploadFile(file, extension, pathlogoSlider, id);
+            CreateMerchantDto_.image = this.configService.get("BASE_URL") + pathlogoSlider;
+        }
+        CreateMerchantDto_.updatedAt = new Date(Date.now());
+        ;
+        try {
+            let data = await this.MerchantService.create(CreateMerchantDto_);
+            var response = {
+                "response_code": 202,
+                "data": data,
+                "messages": {
+                    info: ['Successfuly'],
+                },
+            };
+            return response;
+        }
+        catch (e) {
+            throw new common_1.BadRequestException('Failed create data ' + e);
+        }
+    }
+    async findWhereCompany(request) {
+        const messages = {
+            "info": ["Data successful"],
+        };
+        var request_json = JSON.parse(JSON.stringify(request.body));
+        var address = null;
+        var startdate = null;
+        var enddate = null;
+        var name = null;
+        var data = null;
+        var phone_number = null;
+        var page = null;
+        var limit = null;
+        var descending = null;
+        var id = null;
+        var response = {};
+        id = request_json["id"];
+        address = request_json["address"];
+        startdate = request_json["startdate"];
+        enddate = request_json["enddate"];
+        name = request_json["name"];
+        phone_number = request_json["phone_number"];
+        page = Number(request_json["page"]);
+        limit = Number(request_json["limit"]);
+        descending = request_json["descending"];
+        data = await this.MerchantService.findfilter(startdate, enddate, name, address, phone_number, page, limit, id, descending);
+        response = {
+            "data": data,
+            "page": page,
+            "limit": limit,
+            "messages": messages
+        };
+        return response;
+    }
     async getPict(id, response) {
         if (id == undefined || id == "") {
             throw new common_1.BadRequestException('Param id is required');
@@ -125,6 +191,26 @@ __decorate([
     __metadata("design:paramtypes", [Object, create_merchant_dto_1.CreateMerchantDto, Object]),
     __metadata("design:returntype", Promise)
 ], MerchantController.prototype, "create", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Post)('update'),
+    (0, common_1.HttpCode)(common_1.HttpStatus.ACCEPTED),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file')),
+    __param(0, (0, common_1.UploadedFile)()),
+    __param(1, (0, common_1.Body)()),
+    __param(2, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, create_merchant_dto_1.CreateMerchantDto, Object]),
+    __metadata("design:returntype", Promise)
+], MerchantController.prototype, "update", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Post)('filter'),
+    __param(0, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], MerchantController.prototype, "findWhereCompany", null);
 __decorate([
     (0, common_1.Get)(':id'),
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),

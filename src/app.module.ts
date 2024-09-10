@@ -10,6 +10,8 @@ import { MerchantModule } from './merchant/merchant.module';
 import { Tbl_merchant } from './merchant/merchant.entity';
 import { Tbl_user } from './users/users.entity';
 import { Viewuser } from './users/viewuser.entity';
+import { Viewcategory } from './category/viewcategory.entity';
+import { CategoryModule } from './category/category.module';
 @Module({
   imports: [ConfigModule.forRoot({ isGlobal: true }),EngineModule,
 
@@ -23,7 +25,7 @@ import { Viewuser } from './users/viewuser.entity';
       username: configService.get('DB_USERNAME'),
       password: configService.get('DB_PASSWORD'),
       database: configService.get('DB_NAME'),
-      entities: [ Tbl_user,Viewuser,Tbl_merchant],
+      entities: [ Tbl_user,Viewuser,Tbl_merchant,Viewcategory],
 
     }),
 
@@ -31,7 +33,8 @@ import { Viewuser } from './users/viewuser.entity';
 
     AuthModule,
     UsersModule,
-    MerchantModule
+    MerchantModule,
+    CategoryModule
 
   ],
 

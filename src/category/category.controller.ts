@@ -11,31 +11,27 @@ import {
     UsePipes,
     ValidationPipe, BadRequestException, UseGuards, HttpStatus
 } from '@nestjs/common';
-import { CreateUsersDto } from './dto/create-users.dto';
-import { UsersService } from 'src/users/users.service';
-import { ViewuserService } from 'src/users/viewuser.service';
-import { Viewuser } from 'src/users/viewuser.entity';
-import { Tbl_user } from 'src/users/users.entity';
+import { CreateCategoryDto } from './dto/create-category.dto';
+import { CategoryService } from 'src/category/category.service';
+import { ViewcategoryService } from 'src/category/viewcategory.service';
+import { Viewcategory } from 'src/category/viewcategory.entity';
+import { Tbl_category } from 'src/category/category.entity';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import * as bcrypt from 'bcrypt';
-@Controller('api/users')
-export class UsersController {
+@Controller('api/category')
+export class CategoryController {
 
-    constructor(private readonly usersService: UsersService,private readonly ViewuserService: ViewuserService) { }
+    constructor(private readonly CategoryService: CategoryService,private readonly ViewcategoryService: ViewcategoryService) { }
     @UseGuards(JwtAuthGuard)
     @Get()
-    findAll(): Promise<Tbl_user[]> {
-        return this.usersService.findAll();
+    findAll(): Promise<Tbl_category[]> {
+        return this.CategoryService.findAll();
     }
 
-    @UseGuards(JwtAuthGuard)
-    @Get(':id')
-    findOne(@Param('id', ParseIntPipe) id: string): Promise<Viewuser> {
-        return this.ViewuserService.findById(id);
-    }
+  
     @UseGuards(JwtAuthGuard)
     @Post('create')
-    async create(@Res() res, @Body() CreateUsersDto: CreateUsersDto, @Request() req) {
+    async create(@Res() res, @Body() CreateCategoryDto: CreateCategoryDto, @Request() req) {
         const messages = {
             "info": ["The create successful"],
         };
@@ -44,15 +40,10 @@ export class UsersController {
             "info": ["Todo is not found!"],
         };
 
-
-
         try {
-            const passwordInPlaintext = CreateUsersDto.password;
-            const hash = await bcrypt.hash(passwordInPlaintext, 10);
-            CreateUsersDto.password = hash;
-            CreateUsersDto.createdAt = new Date(Date.now());
-            CreateUsersDto.updatedAt = new Date(Date.now());
-            let data = await this.usersService.create(CreateUsersDto);
+            CreateCategoryDto.createdAt = new Date(Date.now());
+            CreateCategoryDto.updatedAt = new Date(Date.now());
+            let data = await this.CategoryService.create(CreateCategoryDto);
             res.status(HttpStatus.OK).json({
                 response_code: 202,
                 "data": data,
@@ -68,7 +59,7 @@ export class UsersController {
 
     @UseGuards(JwtAuthGuard)
     @Post('update')
-    async update(@Res() res, @Body() CreateUsersDto: CreateUsersDto, @Request() request) {
+    async update(@Res() res, @Body() CreateCategoryDto: CreateCategoryDto, @Request() request) {
         const messages = {
             "info": ["The update successful"],
         };
@@ -85,16 +76,11 @@ export class UsersController {
         } else {
             throw new BadRequestException('Param id is required');
         }
-        if(CreateUsersDto.password !==undefined){
-            const passwordInPlaintext = CreateUsersDto.password;
-            const hash = await bcrypt.hash(passwordInPlaintext, 10);
-            CreateUsersDto.password = hash;
-        }
-       
-        CreateUsersDto.updatedAt = new Date(Date.now());
+      
+        CreateCategoryDto.updatedAt = new Date(Date.now());
         try {
            
-            let data = await this.usersService.update(id,CreateUsersDto);
+            let data = await this.CategoryService.update(id,CreateCategoryDto);
             res.status(HttpStatus.OK).json({
                 response_code: 202,
                 "data": data,
@@ -120,14 +106,14 @@ export class UsersController {
         var data = null;
        
         try {
-            data = await this.usersService.findById(id);
+            data = await this.CategoryService.findById(id);
         } catch (e) {
             data= null;
         }
         if (data && data !== null) {
            
             try {
-                await this.usersService.destroy(id);
+                await this.CategoryService.destroy(id);
             } catch (e) {
                 throw new BadRequestException("Unabled to proceed");
             }
@@ -148,31 +134,30 @@ export class UsersController {
             "info": ["Data successful"],
         };
         var request_json = JSON.parse(JSON.stringify(request.body));
-        var fullname = null;
+        var name = null;
         var startdate = null;
         var enddate = null;
         var merchant_id = null;
         var data = null;
-        var email=null;
-        var role=null;
+        var createdByName=null;
         var page=null;
         var limit=null;
         var descending=null;
         var nameMerchant=null;
+        
         var id=null;
         var response={};
         id = request_json["id"];
-        fullname = request_json["fullname"];
-        email = request_json["email"];
+        name = request_json["name"];
+        createdByName = request_json["createdByName"];
         startdate = request_json["startdate"];
         enddate = request_json["enddate"];
         merchant_id = request_json["merchant_id"];
-        role = request_json["role"];
         page =Number (request_json["page"]);
         limit =Number (request_json["limit"]);
         nameMerchant = request_json["nameMerchant"];
         descending = request_json["descending"];
-        data = await this.ViewuserService.findfilter(startdate, enddate, merchant_id, fullname,email,role,page,limit,id,nameMerchant,descending);
+        data = await this.ViewcategoryService.findfilter(startdate, enddate,merchant_id, name,nameMerchant,createdByName,page,limit,id,descending);
         response={
             "data":data,
             "page":page,
