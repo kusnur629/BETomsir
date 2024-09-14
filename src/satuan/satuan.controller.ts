@@ -16,7 +16,7 @@ import {
 } from '@nestjs/common';
 import { CreateSatuanDto } from './dto/create-satuan.dto';
 import { SatuanService } from 'src/satuan/satuan.service';
-import { Tbl_satuan } from 'src/satuan/Satuan.entity';
+import { Tbl_satuan } from 'src/satuan/satuan.entity';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { ConfigService } from '@nestjs/config';
 import * as fs from 'fs';
