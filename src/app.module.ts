@@ -16,6 +16,8 @@ import { Tbl_category } from 'src/category/category.entity';
 import { Tbl_customer } from 'src/customer/customer.entity';
 import { Viewcustomer } from './customer/viewcustomer.entity';
 import { CustomerModule } from './customer/customer.module';
+import { SatuanModule } from './satuan/satuan.module';
+import { Tbl_satuan } from 'src/satuan/satuan.entity';
 @Module({
   imports: [ConfigModule.forRoot({ isGlobal: true }),EngineModule,
 
@@ -29,7 +31,7 @@ import { CustomerModule } from './customer/customer.module';
       username: configService.get('DB_USERNAME'),
       password: configService.get('DB_PASSWORD'),
       database: configService.get('DB_NAME'),
-      entities: [ Tbl_user,Viewuser,Tbl_merchant,Viewcategory,Tbl_category,Tbl_customer,Viewcustomer],
+      entities: [ Tbl_user,Viewuser,Tbl_merchant,Viewcategory,Tbl_category,Tbl_customer,Viewcustomer,Tbl_satuan],
 
     }),
 
@@ -39,7 +41,8 @@ import { CustomerModule } from './customer/customer.module';
     UsersModule,
     MerchantModule,
     CategoryModule,
-    CustomerModule
+    CustomerModule,
+    SatuanModule
 
   ],
 

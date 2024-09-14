@@ -23,6 +23,8 @@ const category_entity_1 = require("./category/category.entity");
 const customer_entity_1 = require("./customer/customer.entity");
 const viewcustomer_entity_1 = require("./customer/viewcustomer.entity");
 const customer_module_1 = require("./customer/customer.module");
+const satuan_module_1 = require("./satuan/satuan.module");
+const satuan_entity_1 = require("./satuan/satuan.entity");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -38,14 +40,15 @@ AppModule = __decorate([
                     username: configService.get('DB_USERNAME'),
                     password: configService.get('DB_PASSWORD'),
                     database: configService.get('DB_NAME'),
-                    entities: [users_entity_1.Tbl_user, viewuser_entity_1.Viewuser, merchant_entity_1.Tbl_merchant, viewcategory_entity_1.Viewcategory, category_entity_1.Tbl_category, customer_entity_1.Tbl_customer, viewcustomer_entity_1.Viewcustomer],
+                    entities: [users_entity_1.Tbl_user, viewuser_entity_1.Viewuser, merchant_entity_1.Tbl_merchant, viewcategory_entity_1.Viewcategory, category_entity_1.Tbl_category, customer_entity_1.Tbl_customer, viewcustomer_entity_1.Viewcustomer, satuan_entity_1.Tbl_satuan],
                 }),
             }),
             auth_module_1.AuthModule,
             users_module_1.UsersModule,
             merchant_module_1.MerchantModule,
             category_module_1.CategoryModule,
-            customer_module_1.CustomerModule],
+            customer_module_1.CustomerModule,
+            satuan_module_1.SatuanModule],
     })
 ], AppModule);
 exports.AppModule = AppModule;
