@@ -9,40 +9,44 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Tbl_varian = void 0;
+exports.ViewTypeorder = void 0;
 const typeorm_1 = require("typeorm");
-let Tbl_varian = class Tbl_varian {
+let ViewTypeorder = class ViewTypeorder {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
     __metadata("design:type", String)
-], Tbl_varian.prototype, "id", void 0);
+], ViewTypeorder.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Tbl_varian.prototype, "name", void 0);
+], ViewTypeorder.prototype, "name", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Tbl_varian.prototype, "remark", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", Date)
-], Tbl_varian.prototype, "createdAt", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", Date)
-], Tbl_varian.prototype, "updatedAt", void 0);
+], ViewTypeorder.prototype, "email", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
-], Tbl_varian.prototype, "max_limit", void 0);
+], ViewTypeorder.prototype, "status", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    __metadata("design:type", Number)
-], Tbl_varian.prototype, "wajib_pilih", void 0);
-Tbl_varian = __decorate([
+    __metadata("design:type", String)
+], ViewTypeorder.prototype, "merchant_id", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], ViewTypeorder.prototype, "nameMerchant", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Date)
+], ViewTypeorder.prototype, "createdAt", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Date)
+], ViewTypeorder.prototype, "updatedAt", void 0);
+ViewTypeorder = __decorate([
     (0, typeorm_1.Entity)()
-], Tbl_varian);
-exports.Tbl_varian = Tbl_varian;
-//# sourceMappingURL=varian.entity.js.map
+], ViewTypeorder);
+exports.ViewTypeorder = ViewTypeorder;
+//# sourceMappingURL=viewtypeorder.entity.js.map

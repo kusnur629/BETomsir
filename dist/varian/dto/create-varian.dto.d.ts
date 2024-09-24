@@ -4,4 +4,6 @@ export declare class CreateVarianDto {
     remark: string;
     createdAt: Date;
     updatedAt: Date;
+    max_limit: number;
+    wajib_pilih: number;
 }

@@ -25,6 +25,9 @@ const viewcustomer_entity_1 = require("./customer/viewcustomer.entity");
 const customer_module_1 = require("./customer/customer.module");
 const satuan_module_1 = require("./satuan/satuan.module");
 const satuan_entity_1 = require("./satuan/satuan.entity");
+const typeorder_module_1 = require("./typeorder/typeorder.module");
+const typeorder_entity_1 = require("./typeorder/typeorder.entity");
+const viewtypeorder_entity_1 = require("./typeorder/viewtypeorder.entity");
 const varian_module_1 = require("./varian/varian.module");
 const varian_entity_1 = require("./varian/varian.entity");
 let AppModule = class AppModule {
@@ -42,7 +45,7 @@ AppModule = __decorate([
                     username: configService.get('DB_USERNAME'),
                     password: configService.get('DB_PASSWORD'),
                     database: configService.get('DB_NAME'),
-                    entities: [users_entity_1.Tbl_user, viewuser_entity_1.Viewuser, merchant_entity_1.Tbl_merchant, viewcategory_entity_1.Viewcategory, category_entity_1.Tbl_category, customer_entity_1.Tbl_customer, viewcustomer_entity_1.Viewcustomer, satuan_entity_1.Tbl_satuan, varian_entity_1.Tbl_varian],
+                    entities: [users_entity_1.Tbl_user, viewuser_entity_1.Viewuser, merchant_entity_1.Tbl_merchant, viewcategory_entity_1.Viewcategory, category_entity_1.Tbl_category, customer_entity_1.Tbl_customer, viewcustomer_entity_1.Viewcustomer, satuan_entity_1.Tbl_satuan, varian_entity_1.Tbl_varian, typeorder_entity_1.Tbl_type_order, viewtypeorder_entity_1.ViewTypeorder],
                 }),
             }),
             auth_module_1.AuthModule,
@@ -51,7 +54,8 @@ AppModule = __decorate([
             category_module_1.CategoryModule,
             customer_module_1.CustomerModule,
             satuan_module_1.SatuanModule,
-            varian_module_1.VarianModule],
+            varian_module_1.VarianModule,
+            typeorder_module_1.TypeorderModule],
     })
 ], AppModule);
 exports.AppModule = AppModule;

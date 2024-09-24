@@ -18,6 +18,9 @@ import { Viewcustomer } from './customer/viewcustomer.entity';
 import { CustomerModule } from './customer/customer.module';
 import { SatuanModule } from './satuan/satuan.module';
 import { Tbl_satuan } from 'src/satuan/satuan.entity';
+import { TypeorderModule } from './typeorder/typeorder.module';
+import { Tbl_type_order } from 'src/typeorder/typeorder.entity';
+import { ViewTypeorder } from './typeorder/viewtypeorder.entity';
 import { VarianModule } from './varian/varian.module';
 import { Tbl_varian } from 'src/varian/varian.entity';
 @Module({
@@ -33,7 +36,7 @@ import { Tbl_varian } from 'src/varian/varian.entity';
       username: configService.get('DB_USERNAME'),
       password: configService.get('DB_PASSWORD'),
       database: configService.get('DB_NAME'),
-      entities: [ Tbl_user,Viewuser,Tbl_merchant,Viewcategory,Tbl_category,Tbl_customer,Viewcustomer,Tbl_satuan,Tbl_varian],
+      entities: [ Tbl_user,Viewuser,Tbl_merchant,Viewcategory,Tbl_category,Tbl_customer,Viewcustomer,Tbl_satuan,Tbl_varian,Tbl_type_order,ViewTypeorder],
 
     }),
 
@@ -45,7 +48,8 @@ import { Tbl_varian } from 'src/varian/varian.entity';
     CategoryModule,
     CustomerModule,
     SatuanModule,
-    VarianModule
+    VarianModule,
+    TypeorderModule
 
   ],
 

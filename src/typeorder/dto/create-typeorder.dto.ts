@@ -1,11 +1,11 @@
 import { IsEmpty, MinLength } from "class-validator";
 
-export class CreateVarianDto {
+export class CreateTypeorderDto {
     id: string;
     name: string;
-    remark: string;
+    status: number;
+    note: string;
+    merchant_id: string;
     createdAt: Date;
     updatedAt: Date;
-    max_limit: number;
-    wajib_pilih: number;
 }

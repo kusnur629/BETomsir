@@ -49,6 +49,12 @@ export class VarianController {
         CreateVarianDto.id = id;
         CreateVarianDto.createdAt = new Date(Date.now());
         CreateVarianDto.updatedAt = new Date(Date.now());
+        if(CreateVarianDto.max_limit !==undefined){
+            CreateVarianDto.max_limit=Number(CreateVarianDto.max_limit);
+        }
+        if(CreateVarianDto.wajib_pilih !==undefined){
+            CreateVarianDto.wajib_pilih=Number(CreateVarianDto.wajib_pilih);
+        }
         try {
     
             let data = await this.VarianService.create(CreateVarianDto);
@@ -86,6 +92,12 @@ export class VarianController {
         }
       
         CreateVarianDto.updatedAt = new Date(Date.now());
+        if(CreateVarianDto.max_limit !==undefined){
+            CreateVarianDto.max_limit=Number(CreateVarianDto.max_limit);
+        }
+        if(CreateVarianDto.wajib_pilih !==undefined){
+            CreateVarianDto.wajib_pilih=Number(CreateVarianDto.wajib_pilih);
+        }
         try {
            
             let data = await this.VarianService.update(id,CreateVarianDto);

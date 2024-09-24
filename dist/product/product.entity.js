@@ -9,40 +9,60 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Tbl_varian = void 0;
+exports.Tbl_merchant = void 0;
 const typeorm_1 = require("typeorm");
-let Tbl_varian = class Tbl_varian {
+let Tbl_merchant = class Tbl_merchant {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
     __metadata("design:type", String)
-], Tbl_varian.prototype, "id", void 0);
+], Tbl_merchant.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Tbl_varian.prototype, "name", void 0);
+], Tbl_merchant.prototype, "name", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Tbl_varian.prototype, "remark", void 0);
+], Tbl_merchant.prototype, "address", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    __metadata("design:type", Date)
-], Tbl_varian.prototype, "createdAt", void 0);
+    __metadata("design:type", String)
+], Tbl_merchant.prototype, "image", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    __metadata("design:type", Date)
-], Tbl_varian.prototype, "updatedAt", void 0);
+    __metadata("design:type", String)
+], Tbl_merchant.prototype, "phone_number", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Tbl_merchant.prototype, "footer_note", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Tbl_merchant.prototype, "server_key", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Tbl_merchant.prototype, "client_key", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Tbl_merchant.prototype, "catalog", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
-], Tbl_varian.prototype, "max_limit", void 0);
+], Tbl_merchant.prototype, "default_tax", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    __metadata("design:type", Number)
-], Tbl_varian.prototype, "wajib_pilih", void 0);
-Tbl_varian = __decorate([
+    __metadata("design:type", Date)
+], Tbl_merchant.prototype, "createdAt", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Date)
+], Tbl_merchant.prototype, "updatedAt", void 0);
+Tbl_merchant = __decorate([
     (0, typeorm_1.Entity)()
-], Tbl_varian);
-exports.Tbl_varian = Tbl_varian;
-//# sourceMappingURL=varian.entity.js.map
+], Tbl_merchant);
+exports.Tbl_merchant = Tbl_merchant;
+//# sourceMappingURL=product.entity.js.map

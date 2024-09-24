@@ -9,40 +9,40 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Tbl_varian = void 0;
+exports.Tbl_type_order = void 0;
 const typeorm_1 = require("typeorm");
-let Tbl_varian = class Tbl_varian {
+let Tbl_type_order = class Tbl_type_order {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
     __metadata("design:type", String)
-], Tbl_varian.prototype, "id", void 0);
+], Tbl_type_order.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Tbl_varian.prototype, "name", void 0);
+], Tbl_type_order.prototype, "name", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Tbl_type_order.prototype, "status", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Tbl_varian.prototype, "remark", void 0);
+], Tbl_type_order.prototype, "note", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Tbl_type_order.prototype, "merchant_id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Date)
-], Tbl_varian.prototype, "createdAt", void 0);
+], Tbl_type_order.prototype, "createdAt", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Date)
-], Tbl_varian.prototype, "updatedAt", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", Number)
-], Tbl_varian.prototype, "max_limit", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", Number)
-], Tbl_varian.prototype, "wajib_pilih", void 0);
-Tbl_varian = __decorate([
+], Tbl_type_order.prototype, "updatedAt", void 0);
+Tbl_type_order = __decorate([
     (0, typeorm_1.Entity)()
-], Tbl_varian);
-exports.Tbl_varian = Tbl_varian;
-//# sourceMappingURL=varian.entity.js.map
+], Tbl_type_order);
+exports.Tbl_type_order = Tbl_type_order;
+//# sourceMappingURL=typeorder.entity.js.map

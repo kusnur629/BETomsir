@@ -1,0 +1,9 @@
+export declare class Tbl_type_order {
+    id: string;
+    name: string;
+    status: number;
+    note: string;
+    merchant_id: string;
+    createdAt: Date;
+    updatedAt: Date;
+}
