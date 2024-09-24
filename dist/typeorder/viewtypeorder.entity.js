@@ -9,44 +9,44 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ViewTypeorder = void 0;
+exports.Viewtypeorder = void 0;
 const typeorm_1 = require("typeorm");
-let ViewTypeorder = class ViewTypeorder {
+let Viewtypeorder = class Viewtypeorder {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
     __metadata("design:type", String)
-], ViewTypeorder.prototype, "id", void 0);
+], Viewtypeorder.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], ViewTypeorder.prototype, "name", void 0);
+], Viewtypeorder.prototype, "name", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], ViewTypeorder.prototype, "email", void 0);
+], Viewtypeorder.prototype, "email", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
-], ViewTypeorder.prototype, "status", void 0);
+], Viewtypeorder.prototype, "status", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], ViewTypeorder.prototype, "merchant_id", void 0);
+], Viewtypeorder.prototype, "merchant_id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], ViewTypeorder.prototype, "nameMerchant", void 0);
+], Viewtypeorder.prototype, "nameMerchant", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Date)
-], ViewTypeorder.prototype, "createdAt", void 0);
+], Viewtypeorder.prototype, "createdAt", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Date)
-], ViewTypeorder.prototype, "updatedAt", void 0);
-ViewTypeorder = __decorate([
+], Viewtypeorder.prototype, "updatedAt", void 0);
+Viewtypeorder = __decorate([
     (0, typeorm_1.Entity)()
-], ViewTypeorder);
-exports.ViewTypeorder = ViewTypeorder;
+], Viewtypeorder);
+exports.Viewtypeorder = Viewtypeorder;
 //# sourceMappingURL=viewtypeorder.entity.js.map

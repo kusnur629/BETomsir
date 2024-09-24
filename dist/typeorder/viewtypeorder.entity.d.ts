@@ -1,4 +1,4 @@
-export declare class ViewTypeorder {
+export declare class Viewtypeorder {
     id: string;
     name: string;
     email: string;

@@ -45,7 +45,7 @@ AppModule = __decorate([
                     username: configService.get('DB_USERNAME'),
                     password: configService.get('DB_PASSWORD'),
                     database: configService.get('DB_NAME'),
-                    entities: [users_entity_1.Tbl_user, viewuser_entity_1.Viewuser, merchant_entity_1.Tbl_merchant, viewcategory_entity_1.Viewcategory, category_entity_1.Tbl_category, customer_entity_1.Tbl_customer, viewcustomer_entity_1.Viewcustomer, satuan_entity_1.Tbl_satuan, varian_entity_1.Tbl_varian, typeorder_entity_1.Tbl_type_order, viewtypeorder_entity_1.ViewTypeorder],
+                    entities: [users_entity_1.Tbl_user, viewuser_entity_1.Viewuser, merchant_entity_1.Tbl_merchant, viewcategory_entity_1.Viewcategory, category_entity_1.Tbl_category, customer_entity_1.Tbl_customer, viewcustomer_entity_1.Viewcustomer, satuan_entity_1.Tbl_satuan, varian_entity_1.Tbl_varian, typeorder_entity_1.Tbl_type_order, viewtypeorder_entity_1.Viewtypeorder],
                 }),
             }),
             auth_module_1.AuthModule,

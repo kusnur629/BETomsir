@@ -14,7 +14,7 @@ import {
 import { CreateTypeorderDto } from './dto/create-typeorder.dto';
 import { TypeorderService } from 'src/typeorder/typeorder.service';
 import { ViewTypeorderService } from 'src/typeorder/viewtypeorder.service';
-import { ViewTypeorder } from 'src/typeorder/viewtypeorder.entity';
+import { Viewtypeorder } from 'src/typeorder/viewtypeorder.entity';
 import { Tbl_type_order } from 'src/typeorder/typeorder.entity';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { v4 as uuidv4, v6 as uuidv6 } from 'uuid';

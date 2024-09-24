@@ -18,7 +18,7 @@ let TypeorderModule = class TypeorderModule {
 };
 TypeorderModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([typeorder_entity_1.Tbl_type_order, viewtypeorder_entity_1.ViewTypeorder])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([typeorder_entity_1.Tbl_type_order, viewtypeorder_entity_1.Viewtypeorder])],
         providers: [typeorder_service_1.TypeorderService, viewtypeorder_service_1.ViewTypeorderService],
         exports: [typeorder_service_1.TypeorderService, viewtypeorder_service_1.ViewTypeorderService],
         controllers: [typeorder_controller_1.TypeorderController],

@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ViewTypeorder } from './viewtypeorder.entity';
+import { Viewtypeorder } from './viewtypeorder.entity';
 import { Between, Like, Repository } from 'typeorm';
 
 
@@ -11,8 +11,8 @@ export type User = any;
 export class ViewTypeorderService {
 
     constructor(
-        @InjectRepository(ViewTypeorder)
-        private readonly ViewTypeorderRepository: Repository<ViewTypeorder>,
+        @InjectRepository(Viewtypeorder)
+        private readonly ViewTypeorderRepository: Repository<Viewtypeorder>,
     ) { }
 
 
@@ -26,7 +26,7 @@ export class ViewTypeorderService {
         return this.ViewTypeorderRepository.findOneBy({ name: name });
     }
  
-    findfilter(startdate: Date, enddate: Date, merchant_id:string, name: string,nameMerchant:string,phone_number:string,email:string,skip: number, take: number,id:string,descending:boolean): Promise<ViewTypeorder[]> {
+    findfilter(startdate: Date, enddate: Date, merchant_id:string, name: string,nameMerchant:string,phone_number:string,email:string,skip: number, take: number,id:string,descending:boolean): Promise<Viewtypeorder[]> {
         var object = {};
         var x=0;
         var y=10;

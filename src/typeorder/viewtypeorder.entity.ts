@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class ViewTypeorder {
+export class Viewtypeorder {
     @PrimaryGeneratedColumn('uuid')
     id: string;
     @Column()
