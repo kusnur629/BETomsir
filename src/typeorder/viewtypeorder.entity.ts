@@ -7,7 +7,7 @@ export class Viewtypeorder {
     @Column()
     name: string;
     @Column()
-    email: string;
+    note: string;
     @Column()
     status: number;
     @Column()
