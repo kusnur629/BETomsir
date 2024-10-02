@@ -5,6 +5,7 @@ export declare class ResepproductService {
     private readonly ResepproductRepository;
     constructor(ResepproductRepository: Repository<Tbl_product_resep>);
     create(createUsersDto: CreateResepproductDto): Promise<Tbl_product_resep>;
+    findbyproduct(product_id: string): Promise<Tbl_product_resep[]>;
     update(id: string, data: Partial<CreateResepproductDto>): Promise<Tbl_product_resep>;
     destroy(id: string): Promise<{
         deleted: boolean;

@@ -1,6 +1,6 @@
 import { Tbl_product_barcode } from 'src/product/productbarcode.entity';
 import { Repository } from 'typeorm';
-import { CreateProductbarcodeDto } from 'src/product/dto/create-Productbarcode.dto';
+import { CreateProductbarcodeDto } from 'src/product/dto/create-productbarcode.dto';
 export declare class ProductbarcodeService {
     private readonly ProductbarcodeRepository;
     constructor(ProductbarcodeRepository: Repository<Tbl_product_barcode>);

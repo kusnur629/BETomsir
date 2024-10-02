@@ -42,6 +42,9 @@ let BahanbakuproductService = class BahanbakuproductService {
     findByname(nameBahan) {
         return this.BahanbakuproductRepository.findOneBy({ nameBahan: nameBahan });
     }
+    findbyproduct(product_id) {
+        return this.BahanbakuproductRepository.findBy({ product_id: product_id });
+    }
     findfilter(startdate, enddate, name, skip, take, id, descending) {
         var object = {};
         var x = 0;

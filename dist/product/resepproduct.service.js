@@ -25,6 +25,9 @@ let ResepproductService = class ResepproductService {
         const newUser = this.ResepproductRepository.create(createUsersDto);
         return this.ResepproductRepository.save(newUser);
     }
+    findbyproduct(product_id) {
+        return this.ResepproductRepository.findBy({ product_id: product_id });
+    }
     async update(id, data) {
         await this.ResepproductRepository.update({ id }, data);
         return await this.ResepproductRepository.findOneBy({ id });

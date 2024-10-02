@@ -22,12 +22,18 @@ const engine_service_1 = require("../engine/engine.service");
 const config_1 = require("@nestjs/config");
 const productbarcode_service_1 = require("./productbarcode.service");
 const create_productbarcode_dto_1 = require("./dto/create-productbarcode.dto");
+const bahanbakuproduct_service_1 = require("./bahanbakuproduct.service");
+const create_bahanbakuproduct_dto_1 = require("./dto/create-bahanbakuproduct.dto");
+const resepproduct_service_1 = require("./resepproduct.service");
+const create_resepproduct_dto_1 = require("./dto/create-resepproduct.dto");
 const fs = require("fs");
 const uuid_1 = require("uuid");
 let ProductController = class ProductController {
-    constructor(ProductService, ProductbarcodeService, EngineService, configService) {
+    constructor(ProductService, ProductbarcodeService, BahanbakuproductService, ResepproductService, EngineService, configService) {
         this.ProductService = ProductService;
         this.ProductbarcodeService = ProductbarcodeService;
+        this.BahanbakuproductService = BahanbakuproductService;
+        this.ResepproductService = ResepproductService;
         this.EngineService = EngineService;
         this.configService = configService;
     }
@@ -39,7 +45,15 @@ let ProductController = class ProductController {
         var barcode = null;
         var formatbarcode = null;
         var tBarcode = [];
+        var bahanbaku = null;
+        var formatbahanbaku = null;
+        var tBahanbaku = [];
+        var resep = null;
+        var formatresep = null;
+        var tResep = [];
         barcode = request_json["barcode"];
+        bahanbaku = request_json["bahanbaku"];
+        resep = request_json["resep"];
         var id = (0, uuid_1.v4)();
         CreateProductDto_.id = id;
         var pathlogoSlider = "product/" + id;
@@ -47,6 +61,14 @@ let ProductController = class ProductController {
         if (barcode !== undefined) {
             formatbarcode = JSON.parse(JSON.stringify(barcode));
             tBarcode = JSON.parse(formatbarcode);
+        }
+        if (bahanbaku !== undefined) {
+            formatbahanbaku = JSON.parse(JSON.stringify(bahanbaku));
+            tBahanbaku = JSON.parse(formatbahanbaku);
+        }
+        if (resep !== undefined) {
+            formatresep = JSON.parse(JSON.stringify(resep));
+            tResep = JSON.parse(formatresep);
         }
         if (file != undefined) {
             await this.EngineService.uploadFile(file, extension, pathlogoSlider, id);
@@ -63,28 +85,20 @@ let ProductController = class ProductController {
         }
         CreateProductDto_.createdAt = new Date(Date.now());
         CreateProductDto_.updatedAt = new Date(Date.now());
-        if (tBarcode.length > 0) {
-            for (let i = 0; i < tBarcode.length; i++) {
-                let barcode = null;
-                try {
-                    barcode = tBarcode[i];
-                }
-                catch (e) {
-                    barcode = null;
-                }
-                let Tbl_product_barcode_ = new create_productbarcode_dto_1.CreateProductbarcodeDto();
-                Tbl_product_barcode_.barcode = barcode;
-                Tbl_product_barcode_.product_id = id;
-                Tbl_product_barcode_.id = (0, uuid_1.v4)();
-                Tbl_product_barcode_.createdAt = new Date(Date.now());
-                Tbl_product_barcode_.updatedAt = new Date(Date.now());
-                try {
-                    await this.ProductbarcodeService.create(Tbl_product_barcode_);
-                }
-                catch (e) {
-                    console.log(e);
-                }
-            }
+        try {
+            this.barcode(id, tBarcode);
+        }
+        catch (e) {
+        }
+        try {
+            this.bahanbaku(id, tBahanbaku);
+        }
+        catch (e) {
+        }
+        try {
+            this.resep(id, tResep);
+        }
+        catch (e) {
         }
         try {
             let data = await this.ProductService.create(CreateProductDto_);
@@ -246,6 +260,214 @@ let ProductController = class ProductController {
         };
         return response;
     }
+    async create3(res, CreateBahanbakuproductDto, req) {
+        const messages = {
+            "info": ["The create successful"],
+        };
+        const messagesEror = {
+            "info": ["Todo is not found!"],
+        };
+        var id = (0, uuid_1.v4)();
+        CreateBahanbakuproductDto.id = id;
+        CreateBahanbakuproductDto.createdAt = new Date(Date.now());
+        CreateBahanbakuproductDto.updatedAt = new Date(Date.now());
+        try {
+            let data = await this.BahanbakuproductService.create(CreateBahanbakuproductDto);
+            res.status(common_1.HttpStatus.OK).json({
+                response_code: 202,
+                "data": data,
+                "message": messages
+            });
+        }
+        catch (e) {
+            res.status(common_1.HttpStatus.BAD_REQUEST).json({
+                "message": messagesEror + e
+            });
+        }
+    }
+    async update4(res, CreateBahanbakuproductDto, request) {
+        const messages = {
+            "info": ["The update successful"],
+        };
+        const messagesEror = {
+            "info": ["Todo is not found!"],
+        };
+        var request_json = JSON.parse(JSON.stringify(request.body));
+        var id = null;
+        if (request_json["id"] !== undefined) {
+            id = request_json["id"];
+        }
+        else {
+            throw new common_1.BadRequestException('Param id is required');
+        }
+        CreateBahanbakuproductDto.updatedAt = new Date(Date.now());
+        try {
+            let data = await this.BahanbakuproductService.update(id, CreateBahanbakuproductDto);
+            res.status(common_1.HttpStatus.OK).json({
+                response_code: 202,
+                "data": data,
+                "message": messages
+            });
+        }
+        catch (e) {
+            res.status(common_1.HttpStatus.BAD_REQUEST).json({
+                "message": messagesEror
+            });
+        }
+    }
+    async findWhereCompany55(request) {
+        const messages = {
+            "info": ["Data successful"],
+        };
+        var request_json = JSON.parse(JSON.stringify(request.body));
+        var data = null;
+        var id = null;
+        var response = {};
+        id = request_json["id"];
+        try {
+            data = await this.BahanbakuproductService.findById(id);
+        }
+        catch (e) {
+            data = null;
+        }
+        response = {
+            "data": data,
+            "messages": messages
+        };
+        return response;
+    }
+    async delete2f(id) {
+        const messages = {
+            "info": ["The delete successful"],
+        };
+        if (id == undefined || id == "") {
+            throw new common_1.BadRequestException('Param id is required');
+        }
+        var data = null;
+        try {
+            data = await this.BahanbakuproductService.findById(id);
+        }
+        catch (e) {
+            data = null;
+        }
+        if (data && data !== null) {
+            try {
+                await this.BahanbakuproductService.destroy(id);
+            }
+            catch (e) {
+                throw new common_1.BadRequestException("Unabled to proceed");
+            }
+        }
+        var response = {
+            "response_code": 202,
+            "messages": messages
+        };
+        return response;
+    }
+    async create3t(res, CreateResepproductDto, req) {
+        const messages = {
+            "info": ["The create successful"],
+        };
+        const messagesEror = {
+            "info": ["Todo is not found!"],
+        };
+        var id = (0, uuid_1.v4)();
+        CreateResepproductDto.id = id;
+        CreateResepproductDto.createdAt = new Date(Date.now());
+        CreateResepproductDto.updatedAt = new Date(Date.now());
+        try {
+            let data = await this.ResepproductService.create(CreateResepproductDto);
+            res.status(common_1.HttpStatus.OK).json({
+                response_code: 202,
+                "data": data,
+                "message": messages
+            });
+        }
+        catch (e) {
+            res.status(common_1.HttpStatus.BAD_REQUEST).json({
+                "message": messagesEror + e
+            });
+        }
+    }
+    async update45(res, CreateResepproductDto, request) {
+        const messages = {
+            "info": ["The update successful"],
+        };
+        const messagesEror = {
+            "info": ["Todo is not found!"],
+        };
+        var request_json = JSON.parse(JSON.stringify(request.body));
+        var id = null;
+        if (request_json["id"] !== undefined) {
+            id = request_json["id"];
+        }
+        else {
+            throw new common_1.BadRequestException('Param id is required');
+        }
+        CreateResepproductDto.updatedAt = new Date(Date.now());
+        try {
+            let data = await this.ResepproductService.update(id, CreateResepproductDto);
+            res.status(common_1.HttpStatus.OK).json({
+                response_code: 202,
+                "data": data,
+                "message": messages
+            });
+        }
+        catch (e) {
+            res.status(common_1.HttpStatus.BAD_REQUEST).json({
+                "message": messagesEror
+            });
+        }
+    }
+    async findWhereCompany554(request) {
+        const messages = {
+            "info": ["Data successful"],
+        };
+        var request_json = JSON.parse(JSON.stringify(request.body));
+        var data = null;
+        var id = null;
+        var response = {};
+        id = request_json["id"];
+        try {
+            data = await this.ResepproductService.findById(id);
+        }
+        catch (e) {
+            data = null;
+        }
+        response = {
+            "data": data,
+            "messages": messages
+        };
+        return response;
+    }
+    async delete2ft(id) {
+        const messages = {
+            "info": ["The delete successful"],
+        };
+        if (id == undefined || id == "") {
+            throw new common_1.BadRequestException('Param id is required');
+        }
+        var data = null;
+        try {
+            data = await this.ResepproductService.findById(id);
+        }
+        catch (e) {
+            data = null;
+        }
+        if (data && data !== null) {
+            try {
+                await this.ResepproductService.destroy(id);
+            }
+            catch (e) {
+                throw new common_1.BadRequestException("Unabled to proceed");
+            }
+        }
+        var response = {
+            "response_code": 202,
+            "messages": messages
+        };
+        return response;
+    }
     async findWhereCompany(request) {
         const messages = {
             "info": ["Data successful"],
@@ -333,20 +555,123 @@ let ProductController = class ProductController {
         data = await this.ProductService.findById(id);
         if (data !== null) {
             let barcode = [];
-            let categoryName = null;
             try {
                 barcode = await this.ProductbarcodeService.findbyproduct(id);
             }
             catch (e) {
                 barcode = [];
             }
+            let bahanbaku = [];
+            try {
+                bahanbaku = await this.BahanbakuproductService.findbyproduct(id);
+            }
+            catch (e) {
+                bahanbaku = [];
+            }
+            let resep = [];
+            try {
+                resep = await this.ResepproductService.findbyproduct(id);
+            }
+            catch (e) {
+                resep = [];
+            }
             data.barcode = barcode;
+            data.bahanbaku = bahanbaku;
+            data.resep = resep;
         }
         response = {
             "data": data,
             "messages": messages
         };
         return response;
+    }
+    async barcode(idProduct, tBarcode) {
+        if (tBarcode.length > 0) {
+            for (let i = 0; i < tBarcode.length; i++) {
+                let barcode = null;
+                try {
+                    barcode = tBarcode[i];
+                }
+                catch (e) {
+                    barcode = null;
+                }
+                let Tbl_product_barcode_ = new create_productbarcode_dto_1.CreateProductbarcodeDto();
+                Tbl_product_barcode_.barcode = barcode;
+                Tbl_product_barcode_.product_id = idProduct;
+                Tbl_product_barcode_.id = (0, uuid_1.v4)();
+                Tbl_product_barcode_.createdAt = new Date(Date.now());
+                Tbl_product_barcode_.updatedAt = new Date(Date.now());
+                try {
+                    await this.ProductbarcodeService.create(Tbl_product_barcode_);
+                }
+                catch (e) {
+                }
+            }
+        }
+    }
+    async bahanbaku(idProduct, tBahanbaku) {
+        if (tBahanbaku.length > 0) {
+            for (let i = 0; i < tBahanbaku.length; i++) {
+                let nameBahan = null;
+                let jmlButuh = null;
+                let harga = 0;
+                try {
+                    nameBahan = tBahanbaku[i].nameBahan;
+                }
+                catch (e) {
+                    nameBahan = null;
+                }
+                try {
+                    jmlButuh = tBahanbaku[i].jmlButuh;
+                }
+                catch (e) {
+                    jmlButuh = null;
+                }
+                try {
+                    harga = tBahanbaku[i].harga;
+                }
+                catch (e) {
+                    harga = 0;
+                }
+                let Tbl_product_bahanbaku_ = new create_bahanbakuproduct_dto_1.CreateBahanbakuproductDto();
+                Tbl_product_bahanbaku_.nameBahan = nameBahan;
+                Tbl_product_bahanbaku_.product_id = idProduct;
+                Tbl_product_bahanbaku_.id = (0, uuid_1.v4)();
+                Tbl_product_bahanbaku_.createdAt = new Date(Date.now());
+                Tbl_product_bahanbaku_.updatedAt = new Date(Date.now());
+                Tbl_product_bahanbaku_.harga = Number(harga);
+                Tbl_product_bahanbaku_.jmlButuh = jmlButuh;
+                try {
+                    await this.BahanbakuproductService.create(Tbl_product_bahanbaku_);
+                }
+                catch (e) {
+                }
+            }
+        }
+    }
+    async resep(idProduct, tResep) {
+        if (tResep.length > 0) {
+            for (let i = 0; i < tResep.length; i++) {
+                let nameResep = null;
+                try {
+                    nameResep = tResep[i].nameResep;
+                }
+                catch (e) {
+                    nameResep = null;
+                }
+                let Tbl_product_resep_ = new create_resepproduct_dto_1.CreateResepproductDto();
+                Tbl_product_resep_.nameResep = nameResep;
+                Tbl_product_resep_.product_id = idProduct;
+                Tbl_product_resep_.id = (0, uuid_1.v4)();
+                Tbl_product_resep_.createdAt = new Date(Date.now());
+                Tbl_product_resep_.updatedAt = new Date(Date.now());
+                try {
+                    await this.ResepproductService.create(Tbl_product_resep_);
+                }
+                catch (e) {
+                }
+            }
+        }
     }
 };
 __decorate([
@@ -380,6 +705,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ProductController.prototype, "update", null);
 __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Post)('barcode/create'),
     __param(0, (0, common_1.Res)()),
     __param(1, (0, common_1.Body)()),
@@ -413,6 +739,76 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], ProductController.prototype, "delete2", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Post)('bahanbaku/create'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Body)()),
+    __param(2, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, create_bahanbakuproduct_dto_1.CreateBahanbakuproductDto, Object]),
+    __metadata("design:returntype", Promise)
+], ProductController.prototype, "create3", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Post)('bahanbaku/update'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Body)()),
+    __param(2, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, create_bahanbakuproduct_dto_1.CreateBahanbakuproductDto, Object]),
+    __metadata("design:returntype", Promise)
+], ProductController.prototype, "update4", null);
+__decorate([
+    (0, common_1.Post)('bahanbaku/detail'),
+    __param(0, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], ProductController.prototype, "findWhereCompany55", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Post)('bahanbaku/delete/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], ProductController.prototype, "delete2f", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Post)('resep/create'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Body)()),
+    __param(2, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, create_resepproduct_dto_1.CreateResepproductDto, Object]),
+    __metadata("design:returntype", Promise)
+], ProductController.prototype, "create3t", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Post)('resep/update'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Body)()),
+    __param(2, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, create_resepproduct_dto_1.CreateResepproductDto, Object]),
+    __metadata("design:returntype", Promise)
+], ProductController.prototype, "update45", null);
+__decorate([
+    (0, common_1.Post)('resep/detail'),
+    __param(0, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], ProductController.prototype, "findWhereCompany554", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Post)('resep/delete/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], ProductController.prototype, "delete2ft", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Post)('filter'),
@@ -449,6 +845,8 @@ ProductController = __decorate([
     (0, common_1.Controller)('api/product'),
     __metadata("design:paramtypes", [product_service_1.ProductService,
         productbarcode_service_1.ProductbarcodeService,
+        bahanbakuproduct_service_1.BahanbakuproductService,
+        resepproduct_service_1.ResepproductService,
         engine_service_1.EngineService,
         config_1.ConfigService])
 ], ProductController);

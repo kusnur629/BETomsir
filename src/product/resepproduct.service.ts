@@ -14,6 +14,9 @@ export class ResepproductService {
         const newUser = this.ResepproductRepository.create(createUsersDto);
         return this.ResepproductRepository.save(newUser);
     }
+    findbyproduct(product_id:string) {
+        return this.ResepproductRepository.findBy({product_id:product_id});
+    }
     async update(id: string, data: Partial<CreateResepproductDto>) {
         await this.ResepproductRepository.update({ id }, data);
         return await this.ResepproductRepository.findOneBy({ id });

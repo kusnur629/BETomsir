@@ -31,6 +31,9 @@ export class BahanbakuproductService {
     findByname(nameBahan: string) {
         return this.BahanbakuproductRepository.findOneBy({ nameBahan: nameBahan });
     }
+    findbyproduct(product_id:string) {
+        return this.BahanbakuproductRepository.findBy({product_id:product_id});
+    }
     findfilter(startdate: Date, enddate: Date, name:string,skip: number, take: number,id:string,descending:boolean): Promise<Tbl_product_bahanbaku[]> {
         var object = {};
         var x=0;
