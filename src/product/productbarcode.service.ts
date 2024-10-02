@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Tbl_product_barcode } from 'src/product/productbarcode.entity';
 import { Between, Like, Repository } from 'typeorm';
-import { CreateProductbarcodeDto } from 'src/product/dto/create-Productbarcode.dto';
+import { CreateProductbarcodeDto } from 'src/product/dto/create-productbarcode.dto';
 
 @Injectable()
 export class ProductbarcodeService {

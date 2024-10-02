@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Tbl_product_bahanbaku } from 'src/product/bahanbakuproduct.entity';
 import { Between, Like, Repository } from 'typeorm';
-import { CreateBahanbakuproductDto } from 'src/product/dto/create-Bahanbakuproduct.dto';
+import { CreateBahanbakuproductDto } from 'src/product/dto/create-bahanbakuproduct.dto';
 
 @Injectable()
 export class BahanbakuproductService {
