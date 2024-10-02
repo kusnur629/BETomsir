@@ -30,6 +30,13 @@ const typeorder_entity_1 = require("./typeorder/typeorder.entity");
 const viewtypeorder_entity_1 = require("./typeorder/viewtypeorder.entity");
 const varian_module_1 = require("./varian/varian.module");
 const varian_entity_1 = require("./varian/varian.entity");
+const product_module_1 = require("./product/product.module");
+const product_entity_1 = require("./product/product.entity");
+const varianproduct_entity_1 = require("./product/varianproduct.entity");
+const productbarcode_entity_1 = require("./product/productbarcode.entity");
+const varianbarcode_entity_1 = require("./product/varianbarcode.entity");
+const resepproduct_entity_1 = require("./product/resepproduct.entity");
+const bahanbakuproduct_entity_1 = require("./product/bahanbakuproduct.entity");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -45,7 +52,9 @@ AppModule = __decorate([
                     username: configService.get('DB_USERNAME'),
                     password: configService.get('DB_PASSWORD'),
                     database: configService.get('DB_NAME'),
-                    entities: [users_entity_1.Tbl_user, viewuser_entity_1.Viewuser, merchant_entity_1.Tbl_merchant, viewcategory_entity_1.Viewcategory, category_entity_1.Tbl_category, customer_entity_1.Tbl_customer, viewcustomer_entity_1.Viewcustomer, satuan_entity_1.Tbl_satuan, varian_entity_1.Tbl_varian, typeorder_entity_1.Tbl_type_order, viewtypeorder_entity_1.Viewtypeorder],
+                    entities: [users_entity_1.Tbl_user, viewuser_entity_1.Viewuser, merchant_entity_1.Tbl_merchant, viewcategory_entity_1.Viewcategory, category_entity_1.Tbl_category, customer_entity_1.Tbl_customer, viewcustomer_entity_1.Viewcustomer, satuan_entity_1.Tbl_satuan, varian_entity_1.Tbl_varian, typeorder_entity_1.Tbl_type_order, viewtypeorder_entity_1.Viewtypeorder, product_entity_1.Tbl_product,
+                        varianproduct_entity_1.Tbl_product_varian, productbarcode_entity_1.Tbl_product_barcode, varianbarcode_entity_1.Tbl_product_varian_barcode, resepproduct_entity_1.Tbl_product_resep, bahanbakuproduct_entity_1.Tbl_product_bahanbaku
+                    ],
                 }),
             }),
             auth_module_1.AuthModule,
@@ -55,7 +64,8 @@ AppModule = __decorate([
             customer_module_1.CustomerModule,
             satuan_module_1.SatuanModule,
             varian_module_1.VarianModule,
-            typeorder_module_1.TypeorderModule],
+            typeorder_module_1.TypeorderModule,
+            product_module_1.ProductModule],
     })
 ], AppModule);
 exports.AppModule = AppModule;

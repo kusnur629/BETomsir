@@ -1,25 +1,25 @@
-// import { Test, TestingModule } from '@nestjs/testing';
-// import { MerchantService } from './merchant.service';
-// import { Tbl_merchant } from './merchant.entity';
-// import { getRepositoryToken } from '@nestjs/typeorm';
-// describe('MerchantService', () => {
-//   let service: MerchantService;
+import { Test, TestingModule } from '@nestjs/testing';
+import { ProductService } from './product.service';
+import { Tbl_product} from './product.entity';
+import { getRepositoryToken } from '@nestjs/typeorm';
+describe('ProductService', () => {
+  let service: ProductService;
 
-//   beforeEach(async () => {
-//     const module: TestingModule = await Test.createTestingModule({
-//       providers: [MerchantService, {
-//         provide: getRepositoryToken(Tbl_merchant),
-//         useValue: {
-//           save: jest.fn().mockResolvedValue(Tbl_merchant),
-//           find: jest.fn().mockResolvedValue([Tbl_merchant]),
-//         },
-//       }],
-//     }).compile();
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [ProductService, {
+        provide: getRepositoryToken(Tbl_product),
+        useValue: {
+          save: jest.fn().mockResolvedValue(Tbl_product),
+          find: jest.fn().mockResolvedValue([Tbl_product]),
+        },
+      }],
+    }).compile();
 
-//     service = module.get<MerchantService>(MerchantService);
-//   });
+    service = module.get<ProductService>(ProductService);
+  });
 
-//   it('should be defined', () => {
-//     expect(service).toBeDefined();
-//   });
-// });
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+});

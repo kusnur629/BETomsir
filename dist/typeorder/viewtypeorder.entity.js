@@ -24,7 +24,7 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Viewtypeorder.prototype, "email", void 0);
+], Viewtypeorder.prototype, "note", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Number)

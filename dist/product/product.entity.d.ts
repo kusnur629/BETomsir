@@ -1,14 +1,23 @@
-export declare class Tbl_merchant {
+export declare class Tbl_product {
     id: string;
     name: string;
-    address: string;
+    description: string;
     image: string;
-    phone_number: string;
-    footer_note: string;
-    server_key: string;
-    client_key: string;
-    catalog: string;
-    default_tax: number;
+    stock: number;
+    modal: number;
+    price: number;
+    sku: string;
+    sell_type: number;
+    disc: number;
+    is_disc_percentage: number;
+    category_id: string;
+    merchant_id: string;
+    idSatuan: string;
+    is_bundle: number;
+    status: number;
+    is_stock_off: number;
+    createdBy: string;
+    exp_date: Date;
     createdAt: Date;
     updatedAt: Date;
 }

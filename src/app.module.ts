@@ -23,6 +23,13 @@ import { Tbl_type_order } from 'src/typeorder/typeorder.entity';
 import { Viewtypeorder } from './typeorder/viewtypeorder.entity';
 import { VarianModule } from './varian/varian.module';
 import { Tbl_varian } from 'src/varian/varian.entity';
+import { ProductModule } from './product/product.module';
+import { Tbl_product } from 'src/product/product.entity';
+import { Tbl_product_varian } from './product/varianproduct.entity';
+import { Tbl_product_barcode } from './product/productbarcode.entity';
+import { Tbl_product_varian_barcode } from './product/varianbarcode.entity';
+import { Tbl_product_resep } from './product/resepproduct.entity';
+import { Tbl_product_bahanbaku } from './product/bahanbakuproduct.entity';
 @Module({
   imports: [ConfigModule.forRoot({ isGlobal: true }),EngineModule,
 
@@ -36,7 +43,9 @@ import { Tbl_varian } from 'src/varian/varian.entity';
       username: configService.get('DB_USERNAME'),
       password: configService.get('DB_PASSWORD'),
       database: configService.get('DB_NAME'),
-      entities: [ Tbl_user,Viewuser,Tbl_merchant,Viewcategory,Tbl_category,Tbl_customer,Viewcustomer,Tbl_satuan,Tbl_varian,Tbl_type_order,Viewtypeorder],
+      entities: [ Tbl_user,Viewuser,Tbl_merchant,Viewcategory,Tbl_category,Tbl_customer,Viewcustomer,Tbl_satuan,Tbl_varian,Tbl_type_order,Viewtypeorder,Tbl_product,
+        Tbl_product_varian,Tbl_product_barcode,Tbl_product_varian_barcode,Tbl_product_resep,Tbl_product_bahanbaku
+      ],
 
     }),
 
@@ -49,7 +58,8 @@ import { Tbl_varian } from 'src/varian/varian.entity';
     CustomerModule,
     SatuanModule,
     VarianModule,
-    TypeorderModule
+    TypeorderModule,
+    ProductModule
 
   ],
 

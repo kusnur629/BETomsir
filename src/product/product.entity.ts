@@ -1,27 +1,45 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class Tbl_merchant {
+export class Tbl_product {
     @PrimaryGeneratedColumn('uuid')
     id: string;
     @Column()
     name: string;
     @Column()
-    address: string;
+    description: string;
     @Column()
     image: string;
     @Column()
-    phone_number: string;
+    stock: number;
     @Column()
-    footer_note: string;
+    modal: number;
     @Column()
-    server_key: string;
+    price: number;
     @Column()
-    client_key: string;
+    sku: string;
     @Column()
-    catalog: string;
+    sell_type: number;
     @Column()
-    default_tax: number;
+    disc: number;
+    @Column()
+    is_disc_percentage: number;
+    @Column()
+    category_id: string;
+    @Column()
+    merchant_id: string;
+    @Column()
+    idSatuan: string;
+    @Column()
+    is_bundle: number;
+    @Column()
+    status: number;
+    @Column()
+    is_stock_off: number;
+    @Column()
+    createdBy: string;
+    @Column()
+    exp_date: Date;
     @Column()
     createdAt: Date;
     @Column()

@@ -9,13 +9,17 @@ export class CreateProductDto {
     modal: number;
     price: number;
     sku: string;
-    barcode: string;
     sell_type: number;
     disc: number;
     is_disc_percentage: number;
-    exp_date: Date;
     category_id: string;
-    price_product_id: string;
+    merchant_id: string;
+    idSatuan: string;
+    is_bundle: number;
+    status: number;
+    is_stock_off: number;
+    createdBy: string;
+    exp_date: Date;
     createdAt: Date;
     updatedAt: Date;
 }

@@ -9,60 +9,96 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Tbl_merchant = void 0;
+exports.Tbl_product = void 0;
 const typeorm_1 = require("typeorm");
-let Tbl_merchant = class Tbl_merchant {
+let Tbl_product = class Tbl_product {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
     __metadata("design:type", String)
-], Tbl_merchant.prototype, "id", void 0);
+], Tbl_product.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Tbl_merchant.prototype, "name", void 0);
+], Tbl_product.prototype, "name", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Tbl_merchant.prototype, "address", void 0);
+], Tbl_product.prototype, "description", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Tbl_merchant.prototype, "image", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Tbl_merchant.prototype, "phone_number", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Tbl_merchant.prototype, "footer_note", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Tbl_merchant.prototype, "server_key", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Tbl_merchant.prototype, "client_key", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Tbl_merchant.prototype, "catalog", void 0);
+], Tbl_product.prototype, "image", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
-], Tbl_merchant.prototype, "default_tax", void 0);
+], Tbl_product.prototype, "stock", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Tbl_product.prototype, "modal", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Tbl_product.prototype, "price", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Tbl_product.prototype, "sku", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Tbl_product.prototype, "sell_type", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Tbl_product.prototype, "disc", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Tbl_product.prototype, "is_disc_percentage", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Tbl_product.prototype, "category_id", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Tbl_product.prototype, "merchant_id", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Tbl_product.prototype, "idSatuan", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Tbl_product.prototype, "is_bundle", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Tbl_product.prototype, "status", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Tbl_product.prototype, "is_stock_off", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Tbl_product.prototype, "createdBy", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Date)
-], Tbl_merchant.prototype, "createdAt", void 0);
+], Tbl_product.prototype, "exp_date", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Date)
-], Tbl_merchant.prototype, "updatedAt", void 0);
-Tbl_merchant = __decorate([
+], Tbl_product.prototype, "createdAt", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Date)
+], Tbl_product.prototype, "updatedAt", void 0);
+Tbl_product = __decorate([
     (0, typeorm_1.Entity)()
-], Tbl_merchant);
-exports.Tbl_merchant = Tbl_merchant;
+], Tbl_product);
+exports.Tbl_product = Tbl_product;
 //# sourceMappingURL=product.entity.js.map

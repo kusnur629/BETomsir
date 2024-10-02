@@ -1,7 +1,7 @@
 export declare class Viewtypeorder {
     id: string;
     name: string;
-    email: string;
+    note: string;
     status: number;
     merchant_id: string;
     nameMerchant: string;
