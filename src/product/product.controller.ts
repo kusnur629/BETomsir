@@ -27,6 +27,8 @@ import { BahanbakuproductService } from 'src/product/bahanbakuproduct.service';
 import { CreateBahanbakuproductDto } from 'src/product/dto/create-bahanbakuproduct.dto';
 import { ResepproductService } from 'src/product/resepproduct.service';
 import { CreateResepproductDto } from 'src/product/dto/create-resepproduct.dto';
+import { VarianproductService } from 'src/product/varianproduct.service';
+import { CreateVarianproductDto } from 'src/product/dto/create-varianproduct.dto';
 import * as fs from 'fs';
 import { v4 as uuidv4, v6 as uuidv6 } from 'uuid';
 import { json } from 'sequelize';
@@ -39,6 +41,7 @@ export class ProductController {
         private readonly ProductbarcodeService: ProductbarcodeService,
         private readonly BahanbakuproductService: BahanbakuproductService,
         private readonly ResepproductService: ResepproductService,
+        private readonly VarianproductService: VarianproductService,
         private readonly EngineService: EngineService,
         private readonly configService: ConfigService) { }
 
@@ -63,9 +66,14 @@ export class ProductController {
         var resep=null;
         var formatresep=null;
         var tResep=[];
+
+        var varian=null;
+        var formatvarian=null;
+        var tVarian=[];
         barcode = request_json["barcode"];
         bahanbaku = request_json["bahanbaku"];
         resep = request_json["resep"];
+        varian = request_json["varian"];
         var id = uuidv4();
         CreateProductDto_.id = id;
         var pathlogoSlider = "product/" + id;
@@ -99,6 +107,13 @@ export class ProductController {
         if(CreateProductDto_.is_stock_off !==undefined){
             CreateProductDto_.is_stock_off=Number(CreateProductDto_.is_stock_off)
         }
+        if(CreateProductDto_.komisiSales !==undefined){
+            CreateProductDto_.komisiSales=Number(CreateProductDto_.komisiSales)
+        }
+        if(CreateProductDto_.percentageKomisi !==undefined){
+            CreateProductDto_.percentageKomisi=Number(CreateProductDto_.percentageKomisi)
+        }
+       
         CreateProductDto_.createdAt = new Date(Date.now());
         CreateProductDto_.updatedAt = new Date(Date.now());
 
@@ -165,6 +180,12 @@ export class ProductController {
         }
         if(CreateProductDto_.is_stock_off !==undefined){
             CreateProductDto_.is_stock_off=Number(CreateProductDto_.is_stock_off)
+        }
+        if(CreateProductDto_.komisiSales !==undefined){
+            CreateProductDto_.komisiSales=Number(CreateProductDto_.komisiSales)
+        }
+        if(CreateProductDto_.percentageKomisi !==undefined){
+            CreateProductDto_.percentageKomisi=Number(CreateProductDto_.percentageKomisi)
         }
         CreateProductDto_.updatedAt = new Date(Date.now());;
 
@@ -784,6 +805,73 @@ export class ProductController {
              
                 try{
                     await this.ResepproductService.create(Tbl_product_resep_)
+                }catch(e){
+             
+                }
+
+            }
+        }
+    }
+
+    async varian(idProduct:string,tVarian:any[]){
+        if(tVarian.length>0){
+            for(let i=0;i<tVarian.length;i++){
+                let id_variant=null;
+                let name=null;
+                let price=0;
+                let is_stock=0;
+                let active_menu=0;
+                let active_price=0;
+                let stock=0
+                try{
+                    id_variant=tVarian[i].id_variant
+                }catch(e){
+                    id_variant=null;
+                }
+                try{
+                    name=tVarian[i].name
+                }catch(e){
+                    name=null;
+                }
+                try{
+                    price=tVarian[i].price
+                }catch(e){
+                    price=0;
+                }
+                try{
+                    is_stock=tVarian[i].is_stock
+                }catch(e){
+                    is_stock=0;
+                }
+                try{
+                    active_menu=tVarian[i].active_menu
+                }catch(e){
+                    active_menu=0;
+                }
+                try{
+                    active_price=tVarian[i].active_price
+                }catch(e){
+                    active_price=0;
+                }
+                try{
+                    stock=tVarian[i].stock
+                }catch(e){
+                    stock=0;
+                }
+                let Tbl_product_varian__=new CreateVarianproductDto()
+                Tbl_product_varian__.id_variant=id_variant;
+                Tbl_product_varian__.product_id=idProduct;
+                Tbl_product_varian__.id=uuidv4();
+                Tbl_product_varian__.createdAt=new Date(Date.now());
+                Tbl_product_varian__.updatedAt=new Date(Date.now());
+                Tbl_product_varian__.name=name;
+                Tbl_product_varian__.price=Number(price);
+                Tbl_product_varian__.is_stock=Number(is_stock);
+                Tbl_product_varian__.active_menu=Number(active_menu);
+                Tbl_product_varian__.active_price=Number(active_price);
+                Tbl_product_varian__.stock=Number(stock);
+                try{
+                    await this.VarianproductService.create(Tbl_product_varian__)
                 }catch(e){
              
                 }

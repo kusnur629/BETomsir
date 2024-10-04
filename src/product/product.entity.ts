@@ -44,4 +44,9 @@ export class Tbl_product {
     createdAt: Date;
     @Column()
     updatedAt: Date;
+    @Column()
+    komisiSales: number;
+    @Column()
+    percentageKomisi: number;
+  
 }

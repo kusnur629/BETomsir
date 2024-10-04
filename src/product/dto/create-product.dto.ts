@@ -22,4 +22,6 @@ export class CreateProductDto {
     exp_date: Date;
     createdAt: Date;
     updatedAt: Date;
+    komisiSales: number;
+    percentageKomisi: number;
 }
