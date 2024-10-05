@@ -97,6 +97,14 @@ __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Date)
 ], Tbl_product.prototype, "updatedAt", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Tbl_product.prototype, "komisiSales", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Tbl_product.prototype, "percentageKomisi", void 0);
 Tbl_product = __decorate([
     (0, typeorm_1.Entity)()
 ], Tbl_product);

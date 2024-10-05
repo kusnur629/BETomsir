@@ -37,6 +37,9 @@ const productbarcode_entity_1 = require("./product/productbarcode.entity");
 const varianbarcode_entity_1 = require("./product/varianbarcode.entity");
 const resepproduct_entity_1 = require("./product/resepproduct.entity");
 const bahanbakuproduct_entity_1 = require("./product/bahanbakuproduct.entity");
+const bahanbaku_module_1 = require("./bahanbaku/bahanbaku.module");
+const bahanbaku_entity_1 = require("./bahanbaku/bahanbaku.entity");
+const bahanrusak_entity_1 = require("./bahanbaku/bahanrusak.entity");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -53,7 +56,7 @@ AppModule = __decorate([
                     password: configService.get('DB_PASSWORD'),
                     database: configService.get('DB_NAME'),
                     entities: [users_entity_1.Tbl_user, viewuser_entity_1.Viewuser, merchant_entity_1.Tbl_merchant, viewcategory_entity_1.Viewcategory, category_entity_1.Tbl_category, customer_entity_1.Tbl_customer, viewcustomer_entity_1.Viewcustomer, satuan_entity_1.Tbl_satuan, varian_entity_1.Tbl_varian, typeorder_entity_1.Tbl_type_order, viewtypeorder_entity_1.Viewtypeorder, product_entity_1.Tbl_product,
-                        varianproduct_entity_1.Tbl_product_varian, productbarcode_entity_1.Tbl_product_barcode, varianbarcode_entity_1.Tbl_product_varian_barcode, resepproduct_entity_1.Tbl_product_resep, bahanbakuproduct_entity_1.Tbl_product_bahanbaku
+                        varianproduct_entity_1.Tbl_product_varian, productbarcode_entity_1.Tbl_product_barcode, varianbarcode_entity_1.Tbl_product_varian_barcode, resepproduct_entity_1.Tbl_product_resep, bahanbakuproduct_entity_1.Tbl_product_bahanbaku, bahanbaku_entity_1.Tbl_bahanbaku, bahanrusak_entity_1.Tbl_bahan_rusak
                     ],
                 }),
             }),
@@ -65,7 +68,8 @@ AppModule = __decorate([
             satuan_module_1.SatuanModule,
             varian_module_1.VarianModule,
             typeorder_module_1.TypeorderModule,
-            product_module_1.ProductModule],
+            product_module_1.ProductModule,
+            bahanbaku_module_1.BahanbakuModule],
     })
 ], AppModule);
 exports.AppModule = AppModule;

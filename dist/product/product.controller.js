@@ -26,14 +26,17 @@ const bahanbakuproduct_service_1 = require("./bahanbakuproduct.service");
 const create_bahanbakuproduct_dto_1 = require("./dto/create-bahanbakuproduct.dto");
 const resepproduct_service_1 = require("./resepproduct.service");
 const create_resepproduct_dto_1 = require("./dto/create-resepproduct.dto");
+const varianproduct_service_1 = require("./varianproduct.service");
+const create_varianproduct_dto_1 = require("./dto/create-varianproduct.dto");
 const fs = require("fs");
 const uuid_1 = require("uuid");
 let ProductController = class ProductController {
-    constructor(ProductService, ProductbarcodeService, BahanbakuproductService, ResepproductService, EngineService, configService) {
+    constructor(ProductService, ProductbarcodeService, BahanbakuproductService, ResepproductService, VarianproductService, EngineService, configService) {
         this.ProductService = ProductService;
         this.ProductbarcodeService = ProductbarcodeService;
         this.BahanbakuproductService = BahanbakuproductService;
         this.ResepproductService = ResepproductService;
+        this.VarianproductService = VarianproductService;
         this.EngineService = EngineService;
         this.configService = configService;
     }
@@ -51,9 +54,13 @@ let ProductController = class ProductController {
         var resep = null;
         var formatresep = null;
         var tResep = [];
+        var varian = null;
+        var formatvarian = null;
+        var tVarian = [];
         barcode = request_json["barcode"];
         bahanbaku = request_json["bahanbaku"];
         resep = request_json["resep"];
+        varian = request_json["varian"];
         var id = (0, uuid_1.v4)();
         CreateProductDto_.id = id;
         var pathlogoSlider = "product/" + id;
@@ -82,6 +89,12 @@ let ProductController = class ProductController {
         }
         if (CreateProductDto_.is_stock_off !== undefined) {
             CreateProductDto_.is_stock_off = Number(CreateProductDto_.is_stock_off);
+        }
+        if (CreateProductDto_.komisiSales !== undefined) {
+            CreateProductDto_.komisiSales = Number(CreateProductDto_.komisiSales);
+        }
+        if (CreateProductDto_.percentageKomisi !== undefined) {
+            CreateProductDto_.percentageKomisi = Number(CreateProductDto_.percentageKomisi);
         }
         CreateProductDto_.createdAt = new Date(Date.now());
         CreateProductDto_.updatedAt = new Date(Date.now());
@@ -138,6 +151,12 @@ let ProductController = class ProductController {
         }
         if (CreateProductDto_.is_stock_off !== undefined) {
             CreateProductDto_.is_stock_off = Number(CreateProductDto_.is_stock_off);
+        }
+        if (CreateProductDto_.komisiSales !== undefined) {
+            CreateProductDto_.komisiSales = Number(CreateProductDto_.komisiSales);
+        }
+        if (CreateProductDto_.percentageKomisi !== undefined) {
+            CreateProductDto_.percentageKomisi = Number(CreateProductDto_.percentageKomisi);
         }
         CreateProductDto_.updatedAt = new Date(Date.now());
         ;
@@ -673,6 +692,78 @@ let ProductController = class ProductController {
             }
         }
     }
+    async varian(idProduct, tVarian) {
+        if (tVarian.length > 0) {
+            for (let i = 0; i < tVarian.length; i++) {
+                let id_variant = null;
+                let name = null;
+                let price = 0;
+                let is_stock = 0;
+                let active_menu = 0;
+                let active_price = 0;
+                let stock = 0;
+                try {
+                    id_variant = tVarian[i].id_variant;
+                }
+                catch (e) {
+                    id_variant = null;
+                }
+                try {
+                    name = tVarian[i].name;
+                }
+                catch (e) {
+                    name = null;
+                }
+                try {
+                    price = tVarian[i].price;
+                }
+                catch (e) {
+                    price = 0;
+                }
+                try {
+                    is_stock = tVarian[i].is_stock;
+                }
+                catch (e) {
+                    is_stock = 0;
+                }
+                try {
+                    active_menu = tVarian[i].active_menu;
+                }
+                catch (e) {
+                    active_menu = 0;
+                }
+                try {
+                    active_price = tVarian[i].active_price;
+                }
+                catch (e) {
+                    active_price = 0;
+                }
+                try {
+                    stock = tVarian[i].stock;
+                }
+                catch (e) {
+                    stock = 0;
+                }
+                let Tbl_product_varian__ = new create_varianproduct_dto_1.CreateVarianproductDto();
+                Tbl_product_varian__.id_variant = id_variant;
+                Tbl_product_varian__.product_id = idProduct;
+                Tbl_product_varian__.id = (0, uuid_1.v4)();
+                Tbl_product_varian__.createdAt = new Date(Date.now());
+                Tbl_product_varian__.updatedAt = new Date(Date.now());
+                Tbl_product_varian__.name = name;
+                Tbl_product_varian__.price = Number(price);
+                Tbl_product_varian__.is_stock = Number(is_stock);
+                Tbl_product_varian__.active_menu = Number(active_menu);
+                Tbl_product_varian__.active_price = Number(active_price);
+                Tbl_product_varian__.stock = Number(stock);
+                try {
+                    await this.VarianproductService.create(Tbl_product_varian__);
+                }
+                catch (e) {
+                }
+            }
+        }
+    }
 };
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
@@ -847,6 +938,7 @@ ProductController = __decorate([
         productbarcode_service_1.ProductbarcodeService,
         bahanbakuproduct_service_1.BahanbakuproductService,
         resepproduct_service_1.ResepproductService,
+        varianproduct_service_1.VarianproductService,
         engine_service_1.EngineService,
         config_1.ConfigService])
 ], ProductController);

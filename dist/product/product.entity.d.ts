@@ -20,4 +20,6 @@ export declare class Tbl_product {
     exp_date: Date;
     createdAt: Date;
     updatedAt: Date;
+    komisiSales: number;
+    percentageKomisi: number;
 }

@@ -10,14 +10,16 @@ import { BahanbakuproductService } from 'src/product/bahanbakuproduct.service';
 import { CreateBahanbakuproductDto } from 'src/product/dto/create-bahanbakuproduct.dto';
 import { ResepproductService } from 'src/product/resepproduct.service';
 import { CreateResepproductDto } from 'src/product/dto/create-resepproduct.dto';
+import { VarianproductService } from 'src/product/varianproduct.service';
 export declare class ProductController {
     private readonly ProductService;
     private readonly ProductbarcodeService;
     private readonly BahanbakuproductService;
     private readonly ResepproductService;
+    private readonly VarianproductService;
     private readonly EngineService;
     private readonly configService;
-    constructor(ProductService: ProductService, ProductbarcodeService: ProductbarcodeService, BahanbakuproductService: BahanbakuproductService, ResepproductService: ResepproductService, EngineService: EngineService, configService: ConfigService);
+    constructor(ProductService: ProductService, ProductbarcodeService: ProductbarcodeService, BahanbakuproductService: BahanbakuproductService, ResepproductService: ResepproductService, VarianproductService: VarianproductService, EngineService: EngineService, configService: ConfigService);
     findAll(): Promise<Tbl_product[]>;
     create(file: Express.Multer.File, CreateProductDto_: CreateProductDto, request: any): Promise<{
         response_code: number;
@@ -72,4 +74,5 @@ export declare class ProductController {
     barcode(idProduct: string, tBarcode: any[]): Promise<void>;
     bahanbaku(idProduct: string, tBahanbaku: any[]): Promise<void>;
     resep(idProduct: string, tResep: any[]): Promise<void>;
+    varian(idProduct: string, tVarian: any[]): Promise<void>;
 }

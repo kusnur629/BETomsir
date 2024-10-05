@@ -30,6 +30,9 @@ import { Tbl_product_barcode } from './product/productbarcode.entity';
 import { Tbl_product_varian_barcode } from './product/varianbarcode.entity';
 import { Tbl_product_resep } from './product/resepproduct.entity';
 import { Tbl_product_bahanbaku } from './product/bahanbakuproduct.entity';
+import { BahanbakuModule } from './bahanbaku/bahanbaku.module';
+import { Tbl_bahanbaku } from './bahanbaku/bahanbaku.entity';
+import { Tbl_bahan_rusak} from './bahanbaku/bahanrusak.entity';
 @Module({
   imports: [ConfigModule.forRoot({ isGlobal: true }),EngineModule,
 
@@ -44,7 +47,7 @@ import { Tbl_product_bahanbaku } from './product/bahanbakuproduct.entity';
       password: configService.get('DB_PASSWORD'),
       database: configService.get('DB_NAME'),
       entities: [ Tbl_user,Viewuser,Tbl_merchant,Viewcategory,Tbl_category,Tbl_customer,Viewcustomer,Tbl_satuan,Tbl_varian,Tbl_type_order,Viewtypeorder,Tbl_product,
-        Tbl_product_varian,Tbl_product_barcode,Tbl_product_varian_barcode,Tbl_product_resep,Tbl_product_bahanbaku
+        Tbl_product_varian,Tbl_product_barcode,Tbl_product_varian_barcode,Tbl_product_resep,Tbl_product_bahanbaku,Tbl_bahanbaku,Tbl_bahan_rusak
       ],
 
     }),
@@ -59,7 +62,8 @@ import { Tbl_product_bahanbaku } from './product/bahanbakuproduct.entity';
     SatuanModule,
     VarianModule,
     TypeorderModule,
-    ProductModule
+    ProductModule,
+    BahanbakuModule
 
   ],
 
