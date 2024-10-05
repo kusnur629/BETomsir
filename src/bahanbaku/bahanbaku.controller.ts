@@ -75,14 +75,13 @@ export class BahanbakuController {
             CreateBahanbakuDto.harga =Number(CreateBahanbakuDto.harga )
         }
         if(bahanrusak !==undefined){
-            formatbahanrusak= JSON.parse(JSON.stringify(bahanrusak));
-            tBahanrusak=JSON.parse(formatbahanrusak)
+            try{
+                this.bahanrusak(id,bahanrusak)
+            }catch(e){
+    
+            }
         }
-        try{
-            this.bahanrusak(id,tBahanrusak)
-        }catch(e){
-
-        }
+       
         try {
     
             let data = await this.BahanbakuService.create(CreateBahanbakuDto);
