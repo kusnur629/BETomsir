@@ -11,5 +11,6 @@ export declare class BahanrusakService {
     }>;
     findAll(): Promise<Tbl_bahan_rusak[]>;
     findById(id: string): Promise<Tbl_bahan_rusak>;
+    findByIdbaku(id_bahan_baku: string): Promise<Tbl_bahan_rusak[]>;
     findfilter(startdate: Date, enddate: Date, remark: string, skip: number, take: number, id: string, descending: boolean): Promise<Tbl_bahan_rusak[]>;
 }

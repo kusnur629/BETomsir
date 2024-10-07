@@ -12,37 +12,37 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BahanrusakService = void 0;
+exports.BahanbakuresepService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
-const bahanrusak_entity_1 = require("./bahanrusak.entity");
+const bahanbakuresep_entity_1 = require("./bahanbakuresep.entity");
 const typeorm_2 = require("typeorm");
-let BahanrusakService = class BahanrusakService {
-    constructor(BahanrusakRepository) {
-        this.BahanrusakRepository = BahanrusakRepository;
+let BahanbakuresepService = class BahanbakuresepService {
+    constructor(BahanbakuresepRepository) {
+        this.BahanbakuresepRepository = BahanbakuresepRepository;
     }
     create(createUsersDto) {
-        const newUser = this.BahanrusakRepository.create(createUsersDto);
-        return this.BahanrusakRepository.save(newUser);
+        const newUser = this.BahanbakuresepRepository.create(createUsersDto);
+        return this.BahanbakuresepRepository.save(newUser);
     }
     async update(id, data) {
-        await this.BahanrusakRepository.update({ id }, data);
-        return await this.BahanrusakRepository.findOneBy({ id });
+        await this.BahanbakuresepRepository.update({ id }, data);
+        return await this.BahanbakuresepRepository.findOneBy({ id });
     }
     async destroy(id) {
-        await this.BahanrusakRepository.delete({ id });
+        await this.BahanbakuresepRepository.delete({ id });
         return { deleted: true };
     }
     findAll() {
-        return this.BahanrusakRepository.find();
+        return this.BahanbakuresepRepository.find();
     }
     findById(id) {
-        return this.BahanrusakRepository.findOneBy({ id: id });
+        return this.BahanbakuresepRepository.findOneBy({ id: id });
     }
-    findByIdbaku(id_bahan_baku) {
-        return this.BahanrusakRepository.findBy({ id_bahan_baku: id_bahan_baku });
+    findByIdResep(idResep) {
+        return this.BahanbakuresepRepository.findBy({ id_resep: idResep });
     }
-    findfilter(startdate, enddate, remark, skip, take, id, descending) {
+    findfilter(startdate, enddate, nameBahan, skip, take, id, descending) {
         var object = {};
         var x = 0;
         var y = 10;
@@ -56,8 +56,8 @@ let BahanrusakService = class BahanrusakService {
         if (id !== undefined) {
             object = Object.assign({ id: id }, object);
         }
-        if (remark !== undefined) {
-            object = Object.assign({ remark: (0, typeorm_2.Like)('%' + remark + '%') }, object);
+        if (nameBahan !== undefined) {
+            object = Object.assign({ nameBahan: (0, typeorm_2.Like)('%' + nameBahan + '%') }, object);
         }
         if (startdate !== undefined && enddate !== undefined) {
             object = Object.assign({ createdAt: (0, typeorm_2.Between)(startdate, enddate), }, object);
@@ -68,7 +68,7 @@ let BahanrusakService = class BahanrusakService {
         if (take > 0) {
             y = take;
         }
-        const query = this.BahanrusakRepository.find({
+        const query = this.BahanbakuresepRepository.find({
             where: object,
             order: { createdAt: order },
             skip: x,
@@ -77,10 +77,10 @@ let BahanrusakService = class BahanrusakService {
         return query;
     }
 };
-BahanrusakService = __decorate([
+BahanbakuresepService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, typeorm_1.InjectRepository)(bahanrusak_entity_1.Tbl_bahan_rusak)),
+    __param(0, (0, typeorm_1.InjectRepository)(bahanbakuresep_entity_1.Tbl_bahanbaku_resep)),
     __metadata("design:paramtypes", [typeorm_2.Repository])
-], BahanrusakService);
-exports.BahanrusakService = BahanrusakService;
-//# sourceMappingURL=bahanrusak.service.js.map
+], BahanbakuresepService);
+exports.BahanbakuresepService = BahanbakuresepService;
+//# sourceMappingURL=bahanbakuresep.service.js.map

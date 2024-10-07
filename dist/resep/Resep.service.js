@@ -12,37 +12,37 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BahanrusakService = void 0;
+exports.ResepService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
-const bahanrusak_entity_1 = require("./bahanrusak.entity");
+const resep_entity_1 = require("./resep.entity");
 const typeorm_2 = require("typeorm");
-let BahanrusakService = class BahanrusakService {
-    constructor(BahanrusakRepository) {
-        this.BahanrusakRepository = BahanrusakRepository;
+let ResepService = class ResepService {
+    constructor(ResepRepository) {
+        this.ResepRepository = ResepRepository;
     }
     create(createUsersDto) {
-        const newUser = this.BahanrusakRepository.create(createUsersDto);
-        return this.BahanrusakRepository.save(newUser);
+        const newUser = this.ResepRepository.create(createUsersDto);
+        return this.ResepRepository.save(newUser);
     }
     async update(id, data) {
-        await this.BahanrusakRepository.update({ id }, data);
-        return await this.BahanrusakRepository.findOneBy({ id });
+        await this.ResepRepository.update({ id }, data);
+        return await this.ResepRepository.findOneBy({ id });
     }
     async destroy(id) {
-        await this.BahanrusakRepository.delete({ id });
+        await this.ResepRepository.delete({ id });
         return { deleted: true };
     }
     findAll() {
-        return this.BahanrusakRepository.find();
+        return this.ResepRepository.find();
     }
     findById(id) {
-        return this.BahanrusakRepository.findOneBy({ id: id });
+        return this.ResepRepository.findOneBy({ id: id });
     }
-    findByIdbaku(id_bahan_baku) {
-        return this.BahanrusakRepository.findBy({ id_bahan_baku: id_bahan_baku });
+    findByname(name) {
+        return this.ResepRepository.findOneBy({ name: name });
     }
-    findfilter(startdate, enddate, remark, skip, take, id, descending) {
+    findfilter(startdate, enddate, name, skip, take, id, descending) {
         var object = {};
         var x = 0;
         var y = 10;
@@ -56,8 +56,8 @@ let BahanrusakService = class BahanrusakService {
         if (id !== undefined) {
             object = Object.assign({ id: id }, object);
         }
-        if (remark !== undefined) {
-            object = Object.assign({ remark: (0, typeorm_2.Like)('%' + remark + '%') }, object);
+        if (name !== undefined) {
+            object = Object.assign({ name: (0, typeorm_2.Like)('%' + name + '%') }, object);
         }
         if (startdate !== undefined && enddate !== undefined) {
             object = Object.assign({ createdAt: (0, typeorm_2.Between)(startdate, enddate), }, object);
@@ -68,7 +68,7 @@ let BahanrusakService = class BahanrusakService {
         if (take > 0) {
             y = take;
         }
-        const query = this.BahanrusakRepository.find({
+        const query = this.ResepRepository.find({
             where: object,
             order: { createdAt: order },
             skip: x,
@@ -77,10 +77,10 @@ let BahanrusakService = class BahanrusakService {
         return query;
     }
 };
-BahanrusakService = __decorate([
+ResepService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, typeorm_1.InjectRepository)(bahanrusak_entity_1.Tbl_bahan_rusak)),
+    __param(0, (0, typeorm_1.InjectRepository)(resep_entity_1.Tbl_resep)),
     __metadata("design:paramtypes", [typeorm_2.Repository])
-], BahanrusakService);
-exports.BahanrusakService = BahanrusakService;
-//# sourceMappingURL=bahanrusak.service.js.map
+], ResepService);
+exports.ResepService = ResepService;
+//# sourceMappingURL=Resep.service.js.map

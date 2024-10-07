@@ -12,25 +12,25 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BahanbakuController = void 0;
+exports.ResepController = void 0;
 const common_1 = require("@nestjs/common");
-const create_bahanbaku_dto_1 = require("./dto/create-bahanbaku.dto");
-const bahanbaku_service_1 = require("./bahanbaku.service");
+const create_resep_dto_1 = require("./dto/create-resep.dto");
+const resep_service_1 = require("./resep.service");
 const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
 const config_1 = require("@nestjs/config");
 const uuid_1 = require("uuid");
-const bahanrusak_service_1 = require("./bahanrusak.service");
-const create_bahanrusak_dto_1 = require("./dto/create-bahanrusak.dto");
-let BahanbakuController = class BahanbakuController {
-    constructor(BahanbakuService, BahanrusakService, configService) {
-        this.BahanbakuService = BahanbakuService;
-        this.BahanrusakService = BahanrusakService;
+const bahanbakuresep_service_1 = require("./bahanbakuresep.service");
+const create_bahanbakuresep_dto_1 = require("./dto/create-bahanbakuresep.dto");
+let ResepController = class ResepController {
+    constructor(ResepService, BahanbakuresepService, configService) {
+        this.ResepService = ResepService;
+        this.BahanbakuresepService = BahanbakuresepService;
         this.configService = configService;
     }
     findAll() {
-        return this.BahanbakuService.findAll();
+        return this.ResepService.findAll();
     }
-    async create(res, CreateBahanbakuDto, request) {
+    async create(res, CreateResepDto, request) {
         var request_json = JSON.parse(JSON.stringify(request.body));
         const messages = {
             "info": ["The create successful"],
@@ -39,37 +39,23 @@ let BahanbakuController = class BahanbakuController {
             "info": ["Todo is not found!"],
         };
         var id = (0, uuid_1.v4)();
-        var tBahanrusak = [];
-        var bahanrusak = null;
-        var formatbahanrusak = null;
-        bahanrusak = request_json["bahanrusak"];
-        CreateBahanbakuDto.id = id;
-        CreateBahanbakuDto.createdAt = new Date(Date.now());
-        CreateBahanbakuDto.updatedAt = new Date(Date.now());
-        if (CreateBahanbakuDto.stock !== undefined) {
-            CreateBahanbakuDto.stock = Number(CreateBahanbakuDto.stock);
+        var bahanbakuresep = null;
+        bahanbakuresep = request_json["bahanbakuresep"];
+        CreateResepDto.id = id;
+        CreateResepDto.createdAt = new Date(Date.now());
+        CreateResepDto.updatedAt = new Date(Date.now());
+        if (CreateResepDto.hpp !== undefined) {
+            CreateResepDto.hpp = Number(CreateResepDto.hpp);
         }
-        if (CreateBahanbakuDto.is_stock !== undefined) {
-            CreateBahanbakuDto.is_stock = Number(CreateBahanbakuDto.is_stock);
-        }
-        if (CreateBahanbakuDto.is_minus_stock !== undefined) {
-            CreateBahanbakuDto.is_minus_stock = Number(CreateBahanbakuDto.is_minus_stock);
-        }
-        if (CreateBahanbakuDto.qty_plus_minus !== undefined) {
-            CreateBahanbakuDto.qty_plus_minus = Number(CreateBahanbakuDto.qty_plus_minus);
-        }
-        if (CreateBahanbakuDto.harga !== undefined) {
-            CreateBahanbakuDto.harga = Number(CreateBahanbakuDto.harga);
-        }
-        if (bahanrusak !== undefined) {
+        if (bahanbakuresep !== undefined) {
             try {
-                this.bahanrusak(id, bahanrusak);
+                this.Bahanbaku_resep(id, bahanbakuresep);
             }
             catch (e) {
             }
         }
         try {
-            let data = await this.BahanbakuService.create(CreateBahanbakuDto);
+            let data = await this.ResepService.create(CreateResepDto);
             res.status(common_1.HttpStatus.OK).json({
                 response_code: 202,
                 "data": data,
@@ -82,7 +68,7 @@ let BahanbakuController = class BahanbakuController {
             });
         }
     }
-    async update(res, CreateBahanbakuDto, request) {
+    async update(res, CreateResepDto, request) {
         const messages = {
             "info": ["The update successful"],
         };
@@ -97,24 +83,12 @@ let BahanbakuController = class BahanbakuController {
         else {
             throw new common_1.BadRequestException('Param id is required');
         }
-        CreateBahanbakuDto.updatedAt = new Date(Date.now());
-        if (CreateBahanbakuDto.stock !== undefined) {
-            CreateBahanbakuDto.stock = Number(CreateBahanbakuDto.stock);
-        }
-        if (CreateBahanbakuDto.is_stock !== undefined) {
-            CreateBahanbakuDto.is_stock = Number(CreateBahanbakuDto.is_stock);
-        }
-        if (CreateBahanbakuDto.is_minus_stock !== undefined) {
-            CreateBahanbakuDto.is_minus_stock = Number(CreateBahanbakuDto.is_minus_stock);
-        }
-        if (CreateBahanbakuDto.qty_plus_minus !== undefined) {
-            CreateBahanbakuDto.qty_plus_minus = Number(CreateBahanbakuDto.qty_plus_minus);
-        }
-        if (CreateBahanbakuDto.harga !== undefined) {
-            CreateBahanbakuDto.harga = Number(CreateBahanbakuDto.harga);
+        CreateResepDto.updatedAt = new Date(Date.now());
+        if (CreateResepDto.hpp !== undefined) {
+            CreateResepDto.hpp = Number(CreateResepDto.hpp);
         }
         try {
-            let data = await this.BahanbakuService.update(id, CreateBahanbakuDto);
+            let data = await this.ResepService.update(id, CreateResepDto);
             res.status(common_1.HttpStatus.OK).json({
                 response_code: 202,
                 "data": data,
@@ -149,7 +123,7 @@ let BahanbakuController = class BahanbakuController {
         page = Number(request_json["page"]);
         limit = Number(request_json["limit"]);
         descending = request_json["descending"];
-        data = await this.BahanbakuService.findfilter(startdate, enddate, name, page, limit, id, descending);
+        data = await this.ResepService.findfilter(startdate, enddate, name, page, limit, id, descending);
         response = {
             "data": data,
             "page": page,
@@ -167,16 +141,16 @@ let BahanbakuController = class BahanbakuController {
         var id = null;
         var response = {};
         id = request_json["id"];
-        data = await this.BahanbakuService.findById(id);
+        data = await this.ResepService.findById(id);
         if (data !== null) {
-            let bahanrusak = [];
+            let bahanbakuresep = [];
             try {
-                bahanrusak = await this.BahanrusakService.findByIdbaku(id);
+                bahanbakuresep = await this.BahanbakuresepService.findByIdResep(id);
             }
             catch (e) {
-                bahanrusak = [];
+                bahanbakuresep = [];
             }
-            data.bahanrusak = bahanrusak;
+            data.bahanbakuresep = bahanbakuresep;
         }
         response = {
             "data": data,
@@ -193,14 +167,14 @@ let BahanbakuController = class BahanbakuController {
         }
         var data = null;
         try {
-            data = await this.BahanbakuService.findById(id);
+            data = await this.ResepService.findById(id);
         }
         catch (e) {
             data = null;
         }
         if (data && data !== null) {
             try {
-                await this.BahanbakuService.destroy(id);
+                await this.ResepService.destroy(id);
             }
             catch (e) {
                 throw new common_1.BadRequestException("Unabled to proceed");
@@ -212,7 +186,7 @@ let BahanbakuController = class BahanbakuController {
         };
         return response;
     }
-    async create2(res, CreateBahanrusakDto, req) {
+    async create2(res, CreateBahanbakuresepDto, req) {
         const messages = {
             "info": ["The create successful"],
         };
@@ -220,14 +194,17 @@ let BahanbakuController = class BahanbakuController {
             "info": ["Todo is not found!"],
         };
         var id = (0, uuid_1.v4)();
-        CreateBahanrusakDto.id = id;
-        CreateBahanrusakDto.createdAt = new Date(Date.now());
-        CreateBahanrusakDto.updatedAt = new Date(Date.now());
-        if (CreateBahanrusakDto.qty !== undefined) {
-            CreateBahanrusakDto.qty = Number(CreateBahanrusakDto.qty);
+        CreateBahanbakuresepDto.id = id;
+        CreateBahanbakuresepDto.createdAt = new Date(Date.now());
+        CreateBahanbakuresepDto.updatedAt = new Date(Date.now());
+        if (CreateBahanbakuresepDto.qty !== undefined) {
+            CreateBahanbakuresepDto.qty = Number(CreateBahanbakuresepDto.qty);
+        }
+        if (CreateBahanbakuresepDto.harga !== undefined) {
+            CreateBahanbakuresepDto.harga = Number(CreateBahanbakuresepDto.harga);
         }
         try {
-            let data = await this.BahanrusakService.create(CreateBahanrusakDto);
+            let data = await this.BahanbakuresepService.create(CreateBahanbakuresepDto);
             res.status(common_1.HttpStatus.OK).json({
                 response_code: 202,
                 "data": data,
@@ -240,7 +217,7 @@ let BahanbakuController = class BahanbakuController {
             });
         }
     }
-    async update3(res, CreateBahanrusakDto, request) {
+    async update3(res, CreateBahanbakuresepDto, request) {
         const messages = {
             "info": ["The update successful"],
         };
@@ -255,12 +232,15 @@ let BahanbakuController = class BahanbakuController {
         else {
             throw new common_1.BadRequestException('Param id is required');
         }
-        CreateBahanrusakDto.updatedAt = new Date(Date.now());
-        if (CreateBahanrusakDto.qty !== undefined) {
-            CreateBahanrusakDto.qty = Number(CreateBahanrusakDto.qty);
+        CreateBahanbakuresepDto.updatedAt = new Date(Date.now());
+        if (CreateBahanbakuresepDto.qty !== undefined) {
+            CreateBahanbakuresepDto.qty = Number(CreateBahanbakuresepDto.qty);
+        }
+        if (CreateBahanbakuresepDto.harga !== undefined) {
+            CreateBahanbakuresepDto.harga = Number(CreateBahanbakuresepDto.harga);
         }
         try {
-            let data = await this.BahanrusakService.update(id, CreateBahanrusakDto);
+            let data = await this.BahanbakuresepService.update(id, CreateBahanbakuresepDto);
             res.status(common_1.HttpStatus.OK).json({
                 response_code: 202,
                 "data": data,
@@ -283,7 +263,7 @@ let BahanbakuController = class BahanbakuController {
         var response = {};
         id = request_json["id"];
         try {
-            data = await this.BahanrusakService.findById(id);
+            data = await this.BahanbakuresepService.findById(id);
         }
         catch (e) {
             data = null;
@@ -303,14 +283,14 @@ let BahanbakuController = class BahanbakuController {
         }
         var data = null;
         try {
-            data = await this.BahanrusakService.findById(id);
+            data = await this.BahanbakuresepService.findById(id);
         }
         catch (e) {
             data = null;
         }
         if (data && data !== null) {
             try {
-                await this.BahanrusakService.destroy(id);
+                await this.BahanbakuresepService.destroy(id);
             }
             catch (e) {
                 throw new common_1.BadRequestException("Unabled to proceed");
@@ -322,32 +302,48 @@ let BahanbakuController = class BahanbakuController {
         };
         return response;
     }
-    async bahanrusak(idBahanbaku, tBahanrusak) {
-        if (tBahanrusak.length > 0) {
-            for (let i = 0; i < tBahanrusak.length; i++) {
-                let remark = null;
+    async Bahanbaku_resep(idResep, tBahanbakuresep) {
+        if (tBahanbakuresep.length > 0) {
+            for (let i = 0; i < tBahanbakuresep.length; i++) {
+                let nameBahan = null;
                 let qty = 0;
+                let harga = 0;
+                let idBahanbaku = null;
                 try {
-                    remark = tBahanrusak[i].remark;
+                    nameBahan = tBahanbakuresep[i].nameBahan;
                 }
                 catch (e) {
-                    remark = null;
+                    nameBahan = null;
                 }
                 try {
-                    qty = tBahanrusak[i].qty;
+                    qty = tBahanbakuresep[i].qty;
                 }
                 catch (e) {
                     qty = 0;
                 }
-                let Tbl_product_bahanbaku_ = new create_bahanrusak_dto_1.CreateBahanrusakDto();
-                Tbl_product_bahanbaku_.remark = remark;
-                Tbl_product_bahanbaku_.id_bahan_baku = idBahanbaku;
-                Tbl_product_bahanbaku_.id = (0, uuid_1.v4)();
-                Tbl_product_bahanbaku_.createdAt = new Date(Date.now());
-                Tbl_product_bahanbaku_.updatedAt = new Date(Date.now());
-                Tbl_product_bahanbaku_.qty = Number(qty);
                 try {
-                    await this.BahanrusakService.create(Tbl_product_bahanbaku_);
+                    harga = tBahanbakuresep[i].harga;
+                }
+                catch (e) {
+                    harga = 0;
+                }
+                try {
+                    idBahanbaku = tBahanbakuresep[i].idBahanbaku;
+                }
+                catch (e) {
+                    idBahanbaku = null;
+                }
+                let Tbl_product_Resep_ = new create_bahanbakuresep_dto_1.CreateBahanbakuresepDto();
+                Tbl_product_Resep_.nameBahan = nameBahan;
+                Tbl_product_Resep_.id_bahan_baku = idBahanbaku;
+                Tbl_product_Resep_.id_resep = idResep;
+                Tbl_product_Resep_.id = (0, uuid_1.v4)();
+                Tbl_product_Resep_.createdAt = new Date(Date.now());
+                Tbl_product_Resep_.updatedAt = new Date(Date.now());
+                Tbl_product_Resep_.qty = Number(qty);
+                Tbl_product_Resep_.harga = Number(harga);
+                try {
+                    await this.BahanbakuresepService.create(Tbl_product_Resep_);
                 }
                 catch (e) {
                 }
@@ -361,7 +357,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], BahanbakuController.prototype, "findAll", null);
+], ResepController.prototype, "findAll", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Post)('create'),
@@ -369,9 +365,9 @@ __decorate([
     __param(1, (0, common_1.Body)()),
     __param(2, (0, common_1.Request)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, create_bahanbaku_dto_1.CreateBahanbakuDto, Object]),
+    __metadata("design:paramtypes", [Object, create_resep_dto_1.CreateResepDto, Object]),
     __metadata("design:returntype", Promise)
-], BahanbakuController.prototype, "create", null);
+], ResepController.prototype, "create", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Post)('update'),
@@ -379,9 +375,9 @@ __decorate([
     __param(1, (0, common_1.Body)()),
     __param(2, (0, common_1.Request)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, create_bahanbaku_dto_1.CreateBahanbakuDto, Object]),
+    __metadata("design:paramtypes", [Object, create_resep_dto_1.CreateResepDto, Object]),
     __metadata("design:returntype", Promise)
-], BahanbakuController.prototype, "update", null);
+], ResepController.prototype, "update", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Post)('filter'),
@@ -389,14 +385,14 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
-], BahanbakuController.prototype, "findWhereCompany", null);
+], ResepController.prototype, "findWhereCompany", null);
 __decorate([
     (0, common_1.Post)('detail'),
     __param(0, (0, common_1.Req)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
-], BahanbakuController.prototype, "findWhereCompany3", null);
+], ResepController.prototype, "findWhereCompany3", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Post)('delete/:id'),
@@ -404,47 +400,47 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
-], BahanbakuController.prototype, "delete", null);
+], ResepController.prototype, "delete", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
-    (0, common_1.Post)('bahanrusak/create'),
+    (0, common_1.Post)('bahanbakuresep/create'),
     __param(0, (0, common_1.Res)()),
     __param(1, (0, common_1.Body)()),
     __param(2, (0, common_1.Request)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, create_bahanrusak_dto_1.CreateBahanrusakDto, Object]),
+    __metadata("design:paramtypes", [Object, create_bahanbakuresep_dto_1.CreateBahanbakuresepDto, Object]),
     __metadata("design:returntype", Promise)
-], BahanbakuController.prototype, "create2", null);
+], ResepController.prototype, "create2", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
-    (0, common_1.Post)('bahanrusak/update'),
+    (0, common_1.Post)('bahanbakuresep/update'),
     __param(0, (0, common_1.Res)()),
     __param(1, (0, common_1.Body)()),
     __param(2, (0, common_1.Request)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, create_bahanrusak_dto_1.CreateBahanrusakDto, Object]),
+    __metadata("design:paramtypes", [Object, create_bahanbakuresep_dto_1.CreateBahanbakuresepDto, Object]),
     __metadata("design:returntype", Promise)
-], BahanbakuController.prototype, "update3", null);
+], ResepController.prototype, "update3", null);
 __decorate([
-    (0, common_1.Post)('bahanrusak/detail'),
+    (0, common_1.Post)('bahanbakuresep/detail'),
     __param(0, (0, common_1.Req)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
-], BahanbakuController.prototype, "findWhereCompany5", null);
+], ResepController.prototype, "findWhereCompany5", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
-    (0, common_1.Post)('bahanrusak/delete/:id'),
+    (0, common_1.Post)('bahanbakuresep/delete/:id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
-], BahanbakuController.prototype, "delete2", null);
-BahanbakuController = __decorate([
-    (0, common_1.Controller)('api/bahanbaku'),
-    __metadata("design:paramtypes", [bahanbaku_service_1.BahanbakuService,
-        bahanrusak_service_1.BahanrusakService,
+], ResepController.prototype, "delete2", null);
+ResepController = __decorate([
+    (0, common_1.Controller)('api/resep'),
+    __metadata("design:paramtypes", [resep_service_1.ResepService,
+        bahanbakuresep_service_1.BahanbakuresepService,
         config_1.ConfigService])
-], BahanbakuController);
-exports.BahanbakuController = BahanbakuController;
-//# sourceMappingURL=bahanbaku.controller.js.map
+], ResepController);
+exports.ResepController = ResepController;
+//# sourceMappingURL=Resep.controller.js.map
