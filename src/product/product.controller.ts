@@ -51,7 +51,7 @@ export class ProductController {
         return this.ProductService.findAll();
     }
 
-   // @UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard)
     @Post('create')
     @HttpCode(HttpStatus.ACCEPTED)
     @UseInterceptors(FileInterceptor('file'))
@@ -665,7 +665,7 @@ export class ProductController {
 
     }
 
-   // @UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard)
     @Post('detail')
     async findWhereCompany3(@Req() request: Request) {
         const messages = {

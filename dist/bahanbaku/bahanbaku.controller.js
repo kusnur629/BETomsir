@@ -391,6 +391,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], BahanbakuController.prototype, "findWhereCompany", null);
 __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Post)('detail'),
     __param(0, (0, common_1.Req)()),
     __metadata("design:type", Function),

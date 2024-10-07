@@ -185,7 +185,7 @@ export class BahanbakuController {
         return response;
 
     }
-    // @UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard)
     @Post('detail')
     async findWhereCompany3(@Req() request: Request) {
         const messages = {
