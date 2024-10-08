@@ -23,6 +23,7 @@ import * as fs from 'fs';
 import { v4 as uuidv4, v6 as uuidv6 } from 'uuid';
 import { BahanbakuresepService } from 'src/resep/bahanbakuresep.service';
 import { CreateBahanbakuresepDto } from 'src/resep/dto/create-bahanbakuresep.dto';
+import { SatuanService } from 'src/satuan/satuan.service';
 //
 @Controller('api/resep')
 export class ResepController {
@@ -30,6 +31,7 @@ export class ResepController {
     constructor(
         private readonly ResepService: ResepService,
         private readonly BahanbakuresepService: BahanbakuresepService,
+        private readonly SatuanService: SatuanService,
         private readonly configService: ConfigService) { }
 
     @UseGuards(JwtAuthGuard)
@@ -184,6 +186,40 @@ export class ResepController {
                 bahanbakuresep= await this.BahanbakuresepService.findByIdResep(id)
             }catch(e){
                 bahanbakuresep=[]
+            }
+
+            if(bahanbakuresep !==null){
+                if(bahanbakuresep.length>0){
+
+                    for(let i=0;i<bahanbakuresep.length;i++){
+                        let idsatuan=null;
+                        let datasatuan=null;
+                        let nameSatuan=null;
+
+                        try{
+                            idsatuan=bahanbakuresep[i].id_satuan;
+                        }catch(e){
+                            idsatuan=null;
+                        }
+                        try{
+                            datasatuan=await this.SatuanService.findById(idsatuan)
+                        }catch(e){
+                            datasatuan=null;
+                        }
+                        if(datasatuan!==null && datasatuan !==undefined){
+                            let nameSatuan=null;
+                            try{
+                                nameSatuan=datasatuan.name;
+                            }catch(e){
+                                nameSatuan=null;
+                            }
+                            bahanbakuresep[i].nameSatuan=nameSatuan;
+
+                        }
+
+                    }
+
+                }
             }
             data.bahanbakuresep=bahanbakuresep;
  

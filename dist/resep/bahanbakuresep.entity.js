@@ -36,6 +36,10 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
+], Tbl_bahanbaku_resep.prototype, "id_satuan", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
 ], Tbl_bahanbaku_resep.prototype, "nameBahan", void 0);
 __decorate([
     (0, typeorm_1.Column)(),

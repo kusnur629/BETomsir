@@ -15,11 +15,12 @@ const resep_entity_1 = require("./resep.entity");
 const config_1 = require("@nestjs/config");
 const bahanbakuresep_service_1 = require("./bahanbakuresep.service");
 const bahanbakuresep_entity_1 = require("./bahanbakuresep.entity");
+const satuan_module_1 = require("../satuan/satuan.module");
 let ResepModule = class ResepModule {
 };
 ResepModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([resep_entity_1.Tbl_resep, bahanbakuresep_entity_1.Tbl_bahanbaku_resep]), config_1.ConfigModule],
+        imports: [typeorm_1.TypeOrmModule.forFeature([resep_entity_1.Tbl_resep, bahanbakuresep_entity_1.Tbl_bahanbaku_resep]), config_1.ConfigModule, satuan_module_1.SatuanModule],
         providers: [resep_service_1.ResepService, bahanbakuresep_service_1.BahanbakuresepService],
         exports: [resep_service_1.ResepService, bahanbakuresep_service_1.BahanbakuresepService],
         controllers: [resep_controller_1.ResepController],

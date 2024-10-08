@@ -21,10 +21,12 @@ const config_1 = require("@nestjs/config");
 const uuid_1 = require("uuid");
 const bahanbakuresep_service_1 = require("./bahanbakuresep.service");
 const create_bahanbakuresep_dto_1 = require("./dto/create-bahanbakuresep.dto");
+const satuan_service_1 = require("../satuan/satuan.service");
 let ResepController = class ResepController {
-    constructor(ResepService, BahanbakuresepService, configService) {
+    constructor(ResepService, BahanbakuresepService, SatuanService, configService) {
         this.ResepService = ResepService;
         this.BahanbakuresepService = BahanbakuresepService;
+        this.SatuanService = SatuanService;
         this.configService = configService;
     }
     findAll() {
@@ -149,6 +151,19 @@ let ResepController = class ResepController {
             }
             catch (e) {
                 bahanbakuresep = [];
+            }
+            if (bahanbakuresep !== null) {
+                if (bahanbakuresep.length > 0) {
+                    for (let i = 0; i < bahanbakuresep.length; i++) {
+                        let idsatuan = null;
+                        try {
+                            idsatuan = bahanbakuresep[i].id_satuan;
+                        }
+                        catch (e) {
+                            idsatuan = null;
+                        }
+                    }
+                }
             }
             data.bahanbakuresep = bahanbakuresep;
         }
@@ -441,6 +456,7 @@ ResepController = __decorate([
     (0, common_1.Controller)('api/resep'),
     __metadata("design:paramtypes", [resep_service_1.ResepService,
         bahanbakuresep_service_1.BahanbakuresepService,
+        satuan_service_1.SatuanService,
         config_1.ConfigService])
 ], ResepController);
 exports.ResepController = ResepController;

@@ -4,6 +4,7 @@ export declare class Tbl_bahanbaku_resep {
     qty: number;
     harga: number;
     id_resep: string;
+    id_satuan: string;
     nameBahan: string;
     createdAt: Date;
     updatedAt: Date;

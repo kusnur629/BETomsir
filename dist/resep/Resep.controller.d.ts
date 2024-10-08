@@ -4,11 +4,13 @@ import { Tbl_resep } from 'src/resep/resep.entity';
 import { ConfigService } from '@nestjs/config';
 import { BahanbakuresepService } from 'src/resep/bahanbakuresep.service';
 import { CreateBahanbakuresepDto } from 'src/resep/dto/create-bahanbakuresep.dto';
+import { SatuanService } from 'src/satuan/satuan.service';
 export declare class ResepController {
     private readonly ResepService;
     private readonly BahanbakuresepService;
+    private readonly SatuanService;
     private readonly configService;
-    constructor(ResepService: ResepService, BahanbakuresepService: BahanbakuresepService, configService: ConfigService);
+    constructor(ResepService: ResepService, BahanbakuresepService: BahanbakuresepService, SatuanService: SatuanService, configService: ConfigService);
     findAll(): Promise<Tbl_resep[]>;
     create(res: any, CreateResepDto: CreateResepDto, request: any): Promise<void>;
     update(res: any, CreateResepDto: CreateResepDto, request: any): Promise<void>;

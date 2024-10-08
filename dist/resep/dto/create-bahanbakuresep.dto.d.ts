@@ -4,6 +4,7 @@ export declare class CreateBahanbakuresepDto {
     qty: number;
     harga: number;
     id_resep: string;
+    id_satuan: string;
     nameBahan: string;
     createdAt: Date;
     updatedAt: Date;

@@ -13,6 +13,8 @@ export class Tbl_bahanbaku_resep{
     @Column()
     id_resep: string;
     @Column()
+    id_satuan: string;
+    @Column()
     nameBahan: string;
     @Column()
     createdAt: Date;
