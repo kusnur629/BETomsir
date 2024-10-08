@@ -7,6 +7,8 @@ export class Tbl_product_bahanbaku{
     @Column()
     product_id: string;
     @Column()
+    id_bahan_baku: string;
+    @Column()
     nameBahan: string;
     @Column()
     jmlButuh: string;

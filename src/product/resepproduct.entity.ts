@@ -7,6 +7,8 @@ export class Tbl_product_resep{
     @Column()
     product_id: string;
     @Column()
+    id_resep: string;
+    @Column()
     nameResep: string;
     @Column()
     createdAt: Date;
