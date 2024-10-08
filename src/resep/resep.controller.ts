@@ -194,8 +194,7 @@ export class ResepController {
                     for(let i=0;i<bahanbakuresep.length;i++){
                         let idsatuan=null;
                         let datasatuan=null;
-                        let nameSatuan=null;
-
+                      
                         try{
                             idsatuan=bahanbakuresep[i].id_satuan;
                         }catch(e){
@@ -408,6 +407,7 @@ export class ResepController {
                 let qty=0;
                 let harga=0;
                 let idBahanbaku=null;
+                let id_satuan=null;
 
                 try{
                     nameBahan=tBahanbakuresep[i].nameBahan
@@ -429,10 +429,16 @@ export class ResepController {
                 }catch(e){
                     idBahanbaku=null;
                 }
+                try{
+                    id_satuan=tBahanbakuresep[i].id_satuan
+                }catch(e){
+                    id_satuan=null;
+                }
                 let Tbl_product_Resep_=new CreateBahanbakuresepDto()
                 Tbl_product_Resep_.nameBahan=nameBahan;
                 Tbl_product_Resep_.id_bahan_baku=idBahanbaku;
                 Tbl_product_Resep_.id_resep=idResep;
+                Tbl_product_Resep_.id_satuan=id_satuan;
                 Tbl_product_Resep_.id=uuidv4();
                 Tbl_product_Resep_.createdAt=new Date(Date.now());
                 Tbl_product_Resep_.updatedAt=new Date(Date.now());
