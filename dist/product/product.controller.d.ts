@@ -11,6 +11,7 @@ import { CreateBahanbakuproductDto } from 'src/product/dto/create-bahanbakuprodu
 import { ResepproductService } from 'src/product/resepproduct.service';
 import { CreateResepproductDto } from 'src/product/dto/create-resepproduct.dto';
 import { VarianproductService } from 'src/product/varianproduct.service';
+import { BahanbakuService } from 'src/bahanbaku/bahanbaku.service';
 export declare class ProductController {
     private readonly ProductService;
     private readonly ProductbarcodeService;
@@ -19,7 +20,8 @@ export declare class ProductController {
     private readonly VarianproductService;
     private readonly EngineService;
     private readonly configService;
-    constructor(ProductService: ProductService, ProductbarcodeService: ProductbarcodeService, BahanbakuproductService: BahanbakuproductService, ResepproductService: ResepproductService, VarianproductService: VarianproductService, EngineService: EngineService, configService: ConfigService);
+    private readonly BahanbakuService;
+    constructor(ProductService: ProductService, ProductbarcodeService: ProductbarcodeService, BahanbakuproductService: BahanbakuproductService, ResepproductService: ResepproductService, VarianproductService: VarianproductService, EngineService: EngineService, configService: ConfigService, BahanbakuService: BahanbakuService);
     findAll(): Promise<Tbl_product[]>;
     create(file: Express.Multer.File, CreateProductDto_: CreateProductDto, request: any): Promise<{
         response_code: number;

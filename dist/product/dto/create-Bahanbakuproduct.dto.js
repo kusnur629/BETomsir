@@ -4,4 +4,4 @@ exports.CreateBahanbakuproductDto = void 0;
 class CreateBahanbakuproductDto {
 }
 exports.CreateBahanbakuproductDto = CreateBahanbakuproductDto;
-//# sourceMappingURL=create-Bahanbakuproduct.dto.js.map
+//# sourceMappingURL=create-bahanbakuproduct.dto.js.map

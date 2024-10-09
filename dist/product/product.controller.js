@@ -28,10 +28,11 @@ const resepproduct_service_1 = require("./resepproduct.service");
 const create_resepproduct_dto_1 = require("./dto/create-resepproduct.dto");
 const varianproduct_service_1 = require("./varianproduct.service");
 const create_varianproduct_dto_1 = require("./dto/create-varianproduct.dto");
+const bahanbaku_service_1 = require("../bahanbaku/bahanbaku.service");
 const fs = require("fs");
 const uuid_1 = require("uuid");
 let ProductController = class ProductController {
-    constructor(ProductService, ProductbarcodeService, BahanbakuproductService, ResepproductService, VarianproductService, EngineService, configService) {
+    constructor(ProductService, ProductbarcodeService, BahanbakuproductService, ResepproductService, VarianproductService, EngineService, configService, BahanbakuService) {
         this.ProductService = ProductService;
         this.ProductbarcodeService = ProductbarcodeService;
         this.BahanbakuproductService = BahanbakuproductService;
@@ -39,6 +40,7 @@ let ProductController = class ProductController {
         this.VarianproductService = VarianproductService;
         this.EngineService = EngineService;
         this.configService = configService;
+        this.BahanbakuService = BahanbakuService;
     }
     findAll() {
         return this.ProductService.findAll();
@@ -942,7 +944,8 @@ ProductController = __decorate([
         resepproduct_service_1.ResepproductService,
         varianproduct_service_1.VarianproductService,
         engine_service_1.EngineService,
-        config_1.ConfigService])
+        config_1.ConfigService,
+        bahanbaku_service_1.BahanbakuService])
 ], ProductController);
 exports.ProductController = ProductController;
 //# sourceMappingURL=product.controller.js.map

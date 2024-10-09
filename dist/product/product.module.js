@@ -24,11 +24,12 @@ const resepproduct_service_1 = require("./resepproduct.service");
 const resepproduct_entity_1 = require("./resepproduct.entity");
 const bahanbakuproduct_service_1 = require("./bahanbakuproduct.service");
 const bahanbakuproduct_entity_1 = require("./bahanbakuproduct.entity");
+const bahanbaku_module_1 = require("../bahanbaku/bahanbaku.module");
 let ProductModule = class ProductModule {
 };
 ProductModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([product_entity_1.Tbl_product, varianproduct_entity_1.Tbl_product_varian, productbarcode_entity_1.Tbl_product_barcode, varianbarcode_entity_1.Tbl_product_varian_barcode, resepproduct_entity_1.Tbl_product_resep, bahanbakuproduct_entity_1.Tbl_product_bahanbaku]), engine_module_1.EngineModule, config_1.ConfigModule],
+        imports: [typeorm_1.TypeOrmModule.forFeature([product_entity_1.Tbl_product, varianproduct_entity_1.Tbl_product_varian, productbarcode_entity_1.Tbl_product_barcode, varianbarcode_entity_1.Tbl_product_varian_barcode, resepproduct_entity_1.Tbl_product_resep, bahanbakuproduct_entity_1.Tbl_product_bahanbaku]), engine_module_1.EngineModule, config_1.ConfigModule, bahanbaku_module_1.BahanbakuModule],
         providers: [product_service_1.ProductService, varianproduct_service_1.VarianproductService, productbarcode_service_1.ProductbarcodeService, varianbarcode_service_1.VarianbarcodeService, resepproduct_service_1.ResepproductService, bahanbakuproduct_service_1.BahanbakuproductService],
         exports: [product_service_1.ProductService, varianproduct_service_1.VarianproductService, productbarcode_service_1.ProductbarcodeService, varianbarcode_service_1.VarianbarcodeService, resepproduct_service_1.ResepproductService, bahanbakuproduct_service_1.BahanbakuproductService],
         controllers: [product_controller_1.ProductController],

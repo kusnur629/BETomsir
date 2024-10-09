@@ -1,1 +1,1 @@
-{"version":3,"file":"create-Bahanbakuproduct.dto.js","sourceRoot":"","sources":["../../../src/product/dto/create-Bahanbakuproduct.dto.ts"],"names":[],"mappings":";;;AAEA,MAAa,yBAAyB;CAQrC;AARD,8DAQC"}
+{"version":3,"file":"create-bahanbakuproduct.dto.js","sourceRoot":"","sources":["../../../src/product/dto/create-bahanbakuproduct.dto.ts"],"names":[],"mappings":";;;AAEA,MAAa,yBAAyB;CASrC;AATD,8DASC"}

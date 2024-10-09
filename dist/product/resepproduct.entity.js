@@ -24,6 +24,10 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
+], Tbl_product_resep.prototype, "id_resep", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
 ], Tbl_product_resep.prototype, "nameResep", void 0);
 __decorate([
     (0, typeorm_1.Column)(),

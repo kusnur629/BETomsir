@@ -15,9 +15,10 @@ import { ResepproductService } from 'src/product/resepproduct.service';
 import { Tbl_product_resep } from './resepproduct.entity';
 import { BahanbakuproductService } from 'src/product/bahanbakuproduct.service';
 import { Tbl_product_bahanbaku } from './bahanbakuproduct.entity';
+import { BahanbakuModule } from 'src/bahanbaku/bahanbaku.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Tbl_product,Tbl_product_varian,Tbl_product_barcode,Tbl_product_varian_barcode,Tbl_product_resep,Tbl_product_bahanbaku]),EngineModule,ConfigModule],
+  imports: [TypeOrmModule.forFeature([Tbl_product,Tbl_product_varian,Tbl_product_barcode,Tbl_product_varian_barcode,Tbl_product_resep,Tbl_product_bahanbaku]),EngineModule,ConfigModule,BahanbakuModule],
   providers: [ProductService,VarianproductService,ProductbarcodeService,VarianbarcodeService,ResepproductService,BahanbakuproductService],
   exports: [ProductService,VarianproductService,ProductbarcodeService,VarianbarcodeService,ResepproductService,BahanbakuproductService],
   controllers: [ProductController],

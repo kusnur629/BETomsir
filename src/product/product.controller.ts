@@ -29,6 +29,7 @@ import { ResepproductService } from 'src/product/resepproduct.service';
 import { CreateResepproductDto } from 'src/product/dto/create-resepproduct.dto';
 import { VarianproductService } from 'src/product/varianproduct.service';
 import { CreateVarianproductDto } from 'src/product/dto/create-varianproduct.dto';
+import { BahanbakuService } from 'src/bahanbaku/bahanbaku.service';
 import * as fs from 'fs';
 import { v4 as uuidv4, v6 as uuidv6 } from 'uuid';
 import { json } from 'sequelize';
@@ -43,7 +44,8 @@ export class ProductController {
         private readonly ResepproductService: ResepproductService,
         private readonly VarianproductService: VarianproductService,
         private readonly EngineService: EngineService,
-        private readonly configService: ConfigService) { }
+        private readonly configService: ConfigService,
+     private readonly BahanbakuService: BahanbakuService) { }
 
     @UseGuards(JwtAuthGuard)
     @Get()
@@ -412,7 +414,7 @@ export class ProductController {
         }catch(e){
             data=null;
         }
-
+      
        
         response={
             "data":data,
