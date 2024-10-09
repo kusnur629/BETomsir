@@ -752,7 +752,12 @@ export class ProductController {
                 let nameBahan=null;
                 let jmlButuh=null;
                 let harga=0;
-
+                let id_bahan_baku=null;
+                try{
+                    id_bahan_baku=tBahanbaku[i].id_bahan_baku
+                }catch(e){
+                    id_bahan_baku=null;
+                }
                 try{
                     nameBahan=tBahanbaku[i].nameBahan
                 }catch(e){
@@ -776,6 +781,7 @@ export class ProductController {
                 Tbl_product_bahanbaku_.updatedAt=new Date(Date.now());
                 Tbl_product_bahanbaku_.harga=Number(harga);
                 Tbl_product_bahanbaku_.jmlButuh=jmlButuh;
+                Tbl_product_bahanbaku_.id_bahan_baku=id_bahan_baku;
                 try{
                     await this.BahanbakuproductService.create(Tbl_product_bahanbaku_)
                 }catch(e){
@@ -789,7 +795,7 @@ export class ProductController {
         if(tResep.length>0){
             for(let i=0;i<tResep.length;i++){
                 let nameResep=null;
-              
+                let id_resep=null;
 
                 try{
                     nameResep=tResep[i].nameResep
@@ -801,6 +807,7 @@ export class ProductController {
                 let Tbl_product_resep_=new CreateResepproductDto()
                 Tbl_product_resep_.nameResep=nameResep;
                 Tbl_product_resep_.product_id=idProduct;
+                Tbl_product_resep_.id_resep=id_resep;
                 Tbl_product_resep_.id=uuidv4();
                 Tbl_product_resep_.createdAt=new Date(Date.now());
                 Tbl_product_resep_.updatedAt=new Date(Date.now());
